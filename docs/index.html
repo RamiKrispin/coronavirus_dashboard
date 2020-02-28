@@ -28,6 +28,13 @@ window.FlexDashboardComponents = [];
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 <style type="text/css">
 
 /*
@@ -2586,29 +2593,25 @@ window.FlexDashboardComponents.push({
 
 <div id="dashboard-container">
 
-<div id="column" class="section level2" data-width="650">
-<h2 data-width="650">Column</h2>
-<div id="chart-a" class="section level3">
-<h3>Chart A</h3>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<div id="total-cases-by-type" class="section level3">
+<h3>Total Cases by Type</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
+<div id="htmlwidget-17a0c8ff2efa669db8e8" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-17a0c8ff2efa669db8e8">{"x":{"visdat":{"1078a4d688930":["function () ","plotlyVisDat"]},"cur_data":"1078a4d688930","attrs":{"1078a4d688930":{"x":{},"y":{},"text":{},"textposition":"auto","name":"Confirmed","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"1078a4d688930.1":{"x":{},"y":{},"text":{},"textposition":"auto","name":"Recovered","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true},"1078a4d688930.2":{"x":{},"y":{},"text":{},"textposition":"auto","name":"Death","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","yaxis":{"domain":[0,1],"automargin":true,"title":"Total Cases (log scaled)","type":"log"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Country","type":"category","categoryorder":"array","categoryarray":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","Switzerland","Iraq","Sweden","Oman","Austria","Croatia","Greece","India","Israel","Philippines","Finland","Lebanon","Pakistan","Russia","Afghanistan","Algeria","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Nepal","Netherlands","North Macedonia","Norway","Romania","San Marino","Sri Lanka"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","Switzerland","Iraq","Sweden","Oman","Austria","Croatia","Greece","India","Israel","Philippines","Finland","Lebanon","Pakistan","Russia","Afghanistan","Algeria","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Nepal","Netherlands","North Macedonia","Norway","Romania","San Marino","Sri Lanka"],"y":[78498,1766,705,655,245,214,93,92,60,46,43,40,38,33,32,23,23,16,15,15,13,13,10,8,7,7,4,3,3,3,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"text":[78498,1766,705,655,245,214,93,92,60,46,43,40,38,33,32,23,23,16,15,15,13,13,10,8,7,7,4,3,3,3,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"textposition":["auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto"],"name":"Confirmed","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Thailand","France","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","India","Israel","Philippines","Finland","Russia","Belgium","Cambodia","Nepal","Sri Lanka"],"y":[32898,22,10,45,49,22,62,24,6,16,22,11,5,11,18,16,2,8,6,4,8,3,1,1,1,2,1,1,1,1],"text":[32898,22,10,45,49,22,62,24,6,16,22,11,5,11,18,16,2,8,6,4,8,3,1,1,1,2,1,1,1,1],"textposition":["auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto","auto"],"name":"Recovered","type":"bar","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Hong Kong","France","Taiwan","Philippines"],"y":[2744,13,4,17,26,4,2,2,1,1],"text":[2744,13,4,17,26,4,2,2,1,1],"textposition":["auto","auto","auto","auto","auto","auto","auto","auto","auto","auto"],"name":"Death","type":"bar","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
-</div>
-<div id="column-1" class="section level2" data-width="350">
-<h2 data-width="350">Column</h2>
 <div id="chart-b" class="section level3">
 <h3>Chart B</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
 </div>
-<div id="chart-c" class="section level3">
-<h3>Chart C</h3>
-<div class="knitr-options" data-fig-width="576" data-fig-height="460">
-
 </div>
-</div>
+<div id="tab-2" class="section level1">
+<h1>tab 2</h1>
 </div>
 
 </div>

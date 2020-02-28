@@ -8,19 +8,56 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(coronavirus)
+data(coronavirus)
+`%>%` <- magrittr::`%>%`
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
+Summary
+=======================================================================
 
-### Chart A
 
-```{r}
+### Total Cases by Type
+
+```{r daily_summary}
+library(coronavirus)
+df <- coronavirus %>% 
+  # dplyr::filter(date == max(date)) %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total = sum(cases)) %>%
+  tidyr::pivot_wider(names_from =  type, 
+                     values_from = total) %>%
+  dplyr::arrange(-confirmed) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(country = factor(Country.Region, levels = Country.Region))
+
+plotly::plot_ly(data = df, 
+                x = ~ country, 
+                y = ~ confirmed, 
+                text =  ~ confirmed, 
+                textposition = 'auto',
+                type = "bar", 
+                name = "Confirmed") %>%
+  plotly::add_trace(y = ~ recovered, 
+                    text =  ~ recovered, 
+                    textposition = 'auto',
+                    name = "Recovered") %>%
+  plotly::add_trace(y = ~ death, 
+                    text =  ~ death, 
+                    textposition = 'auto',
+                    name = "Death") %>%
+  plotly::layout(barmode = 'stack',
+                 yaxis = list(title = "Total Cases (log scaled)",
+                              type = "log"),
+                 xaxis = list(title = "Country"))
+
+
+  
+
 
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+
 
 ### Chart B
 
@@ -28,10 +65,7 @@ Column {data-width=350}
 
 ```
 
-### Chart C
-
-```{r}
-
-```
 
 
+tab 2
+=======================================================================
