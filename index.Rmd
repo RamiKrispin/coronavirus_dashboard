@@ -1,8 +1,8 @@
 ---
-title: "Untitled"
+title: "Coronavirus"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: rows
     vertical_layout: fill
 ---
 
@@ -11,15 +11,7 @@ library(flexdashboard)
 library(coronavirus)
 data(coronavirus)
 `%>%` <- magrittr::`%>%`
-```
 
-Summary
-=======================================================================
-
-
-### Total Cases by Type
-
-```{r daily_summary}
 library(coronavirus)
 df <- coronavirus %>% 
   # dplyr::filter(date == max(date)) %>%
@@ -30,6 +22,46 @@ df <- coronavirus %>%
   dplyr::arrange(-confirmed) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(country = factor(Country.Region, levels = Country.Region))
+
+
+```
+
+Summary
+=======================================================================
+Row
+-----------------------------------------------------------------------
+
+### confirmed {.value-box}
+
+```{r}
+
+valueBox(value = sum(df$confirmed), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
+```
+
+### recovered {.value-box}
+
+```{r}
+valueBox(value = sum(df$recovered, na.rm = TRUE), caption = "Recovered Cases", icon = "fas fa-heartbeat", color = "green")
+```
+
+### death {.value-box}
+
+```{r}
+
+valueBox(value = sum(df$death, na.rm = TRUE), 
+         caption = "Death Cases", 
+         icon = "fas fa-heart-broken", 
+         color = "red")
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+### Total Cases by Type/Country
+
+```{r daily_summary}
+
 
 plotly::plot_ly(data = df, 
                 x = ~ country, 
@@ -60,15 +92,107 @@ plotly::plot_ly(data = df,
 
 ```
 
+Row
+-----------------------------------------------------------------------
 
 
-### Chart B
+### Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World
+    
+```{r}
+daily_confirmed <- coronavirus %>%
+  dplyr::filter(type == "confirmed") %>%
+  dplyr::mutate(country = dplyr::if_else(Country.Region == "Mainland China", 
+                                         "China", 
+                                         "Rest of the World")) %>%
+  dplyr::group_by(date, country) %>%
+  dplyr::summarise(total = sum(cases)) %>% 
+  dplyr::ungroup() %>%
+  tidyr::pivot_wider(names_from = country, values_from = total) 
 
+#----------------------------------------
+# Plotting the data
+
+daily_confirmed %>%
+  plotly::plot_ly(x = ~date, 
+                  y = ~ China, 
+                  name = 'China', 
+                  type = 'scatter', 
+                  mode = 'none', 
+                  stackgroup = 'one', 
+                  groupnorm = 'percent', 
+                  fillcolor = "#d62728") %>% 
+  plotly::add_trace(y = ~ `Rest of the World`, name = 'Rest of the World', fillcolor = "#9467bd") %>%
+  plotly::layout(title = "",
+                 yaxis = list(title = "Proportion of New Cases", ticksuffix = '%'),
+                 xaxis = list(title = "Date"),
+                 legend = list(orientation = 'h'),
+                 # paper_bgcolor = "black",
+                 # plot_bgcolor = "black",
+                 # font = list(color = 'white'),
+                 hovermode = "compare",
+                 margin =  list(
+                   # l = 60,
+                   # r = 40,
+                   b = 10,
+                   t = 10,
+                   pad = 2
+                 ))
+
+```
+
+
+### Recovery and Death Rates by Country
+    
+```{r}
+coronavirus::coronavirus %>% 
+  dplyr::filter(Country.Region != "Others") %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total_cases = sum(cases)) %>%
+  tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
+  dplyr::arrange(- confirmed) %>%
+  dplyr::filter(confirmed >= 25) %>%
+  dplyr::mutate(recover_rate = recovered / confirmed,
+         death_rate = death / confirmed)  %>%
+  DT::datatable(rownames = FALSE,
+            colnames = c("Country", "Confirmed", "Recovered", "Death", "Recovery Rate", "Death Rate")) %>%
+  DT::formatPercentage("recover_rate", 2) %>%
+  DT::formatPercentage("death_rate", 2) 
+```
+
+
+New Cases
+=======================================================================
+
+
+Column {data-width=500}
+-------------------------------------
+    
+### Distribution of New Cases 
+    
 ```{r}
 
 ```
 
 
+### Chart 2
 
-tab 2
-=======================================================================
+```{r}
+
+```  
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Chart 3
+
+```{r}
+
+```   
+ 
+### Chart 4
+    
+```{r}
+
+```
+
+
