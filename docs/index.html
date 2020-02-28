@@ -8,9 +8,9 @@
 
 
 
-<title>Untitled</title>
+<title>Coronavirus</title>
 
-<meta property="og:title" content="Untitled" />
+<meta property="og:title" content="Coronavirus" />
 
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 
@@ -21,13 +21,15 @@
 window.FlexDashboardComponents = [];
 </script>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="site_libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
@@ -35,6 +37,11 @@ window.FlexDashboardComponents = [];
 <script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.7/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 <style type="text/css">
 
 /*
@@ -812,7 +819,7 @@ html, body {
   
 </span>
 <span class="navbar-brand">
-  Untitled
+  Coronavirus
   <span class="navbar-author">
         </span>
 </span>
@@ -2595,23 +2602,93 @@ window.FlexDashboardComponents.push({
 
 <div id="summary" class="section level1">
 <h1>Summary</h1>
-<div id="total-cases-by-type" class="section level3">
-<h3>Total Cases by Type</h3>
+<div id="row" class="section level2">
+<h2>Row</h2>
+<div id="confirmed" class="section level3 value-box">
+<h3 class="value-box">confirmed</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
-<div id="htmlwidget-fd614d4eb466af221d32" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fd614d4eb466af221d32">{"x":{"visdat":{"145d0db60375":["function () ","plotlyVisDat"]},"cur_data":"145d0db60375","attrs":{"145d0db60375":{"x":{},"y":{},"name":"Confirmed","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"145d0db60375.1":{"x":{},"y":{},"name":"Recovered","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"green"},"inherit":true},"145d0db60375.2":{"x":{},"y":{},"name":"Death","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"red"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","yaxis":{"domain":[0,1],"automargin":true,"title":"Total Cases (log scaled)","type":"log"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Country","type":"category","categoryorder":"array","categoryarray":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","Switzerland","Iraq","Sweden","Oman","Austria","Croatia","Greece","India","Israel","Philippines","Finland","Lebanon","Pakistan","Russia","Afghanistan","Algeria","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Nepal","Netherlands","North Macedonia","Norway","Romania","San Marino","Sri Lanka"]},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","Switzerland","Iraq","Sweden","Oman","Austria","Croatia","Greece","India","Israel","Philippines","Finland","Lebanon","Pakistan","Russia","Afghanistan","Algeria","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Nepal","Netherlands","North Macedonia","Norway","Romania","San Marino","Sri Lanka"],"y":[78498,1766,705,655,245,214,93,92,60,46,43,40,38,33,32,23,23,16,15,15,13,13,10,8,7,7,4,3,3,3,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Confirmed","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Thailand","France","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","India","Israel","Philippines","Finland","Russia","Belgium","Cambodia","Nepal","Sri Lanka"],"y":[32898,22,10,45,49,22,62,24,6,16,22,11,5,11,18,16,2,8,6,4,8,3,1,1,1,2,1,1,1,1],"name":"Recovered","type":"bar","marker":{"color":"green","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Hong Kong","France","Taiwan","Philippines"],"y":[2744,13,4,17,26,4,2,2,1,1],"name":"Death","type":"bar","marker":{"color":"red","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<span class="value-output" data-caption="Confirmed Cases" data-icon="fas fa-ambulance" data-color="#1f77b4">82756</span>
 </div>
-<div id="chart-b" class="section level3">
-<h3>Chart B</h3>
+<div id="recovered" class="section level3 value-box">
+<h3 class="value-box">recovered</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<span class="value-output" data-caption="Recovered Cases" data-icon="fas fa-heartbeat" data-color="green">33277</span>
+</div>
+<div id="death" class="section level3 value-box">
+<h3 class="value-box">death</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<span class="value-output" data-caption="Death Cases" data-icon="fas fa-heart-broken" data-color="red">2814</span>
+</div>
+</div>
+<div id="row-1" class="section level2">
+<h2>Row</h2>
+<div id="total-cases-by-typecountry" class="section level3">
+<h3>Total Cases by Type/Country</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-336815e37afbfc3ccf54" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-336815e37afbfc3ccf54">{"x":{"visdat":{"6939f05624d":["function () ","plotlyVisDat"]},"cur_data":"6939f05624d","attrs":{"6939f05624d":{"x":{},"y":{},"name":"Confirmed","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"6939f05624d.1":{"x":{},"y":{},"name":"Recovered","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"green"},"inherit":true},"6939f05624d.2":{"x":{},"y":{},"name":"Death","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"red"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","yaxis":{"domain":[0,1],"automargin":true,"title":"Total Cases (log scaled)","type":"log"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Country","type":"category","categoryorder":"array","categoryarray":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","Switzerland","Iraq","Sweden","Oman","Austria","Croatia","Greece","India","Israel","Philippines","Finland","Lebanon","Pakistan","Russia","Afghanistan","Algeria","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Nepal","Netherlands","North Macedonia","Norway","Romania","San Marino","Sri Lanka"]},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","Switzerland","Iraq","Sweden","Oman","Austria","Croatia","Greece","India","Israel","Philippines","Finland","Lebanon","Pakistan","Russia","Afghanistan","Algeria","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Nepal","Netherlands","North Macedonia","Norway","Romania","San Marino","Sri Lanka"],"y":[78498,1766,705,655,245,214,93,92,60,46,43,40,38,33,32,23,23,16,15,15,13,13,10,8,7,7,4,3,3,3,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Confirmed","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Thailand","France","Taiwan","Australia","Malaysia","Vietnam","Spain","UK","Canada","United Arab Emirates","Macau","India","Israel","Philippines","Finland","Russia","Belgium","Cambodia","Nepal","Sri Lanka"],"y":[32898,22,10,45,49,22,62,24,6,16,22,11,5,11,18,16,2,8,6,4,8,3,1,1,1,2,1,1,1,1],"name":"Recovered","type":"bar","marker":{"color":"green","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Mainland China","South Korea","Others","Italy","Iran","Japan","Hong Kong","France","Taiwan","Philippines"],"y":[2744,13,4,17,26,4,2,2,1,1],"name":"Death","type":"bar","marker":{"color":"red","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="row-2" class="section level2">
+<h2>Row</h2>
+<div id="coronavirus-daily-confirmed-cases-dist---china-vs.-rest-of-the-world" class="section level3">
+<h3>Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-5a6ac46e6af13618bca5" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5a6ac46e6af13618bca5">{"x":{"visdat":{"69395aaeccb1":["function () ","plotlyVisDat"]},"cur_data":"69395aaeccb1","attrs":{"69395aaeccb1":{"x":{},"y":{},"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#d62728","name":"China","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"69395aaeccb1.1":{"x":{},"y":{},"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#9467bd","name":"Rest of the World","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":10,"l":60,"t":10,"r":10,"pad":2},"title":"","yaxis":{"domain":[0,1],"automargin":true,"title":"Proportion of New Cases","ticksuffix":"%"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Date"},"legend":{"orientation":"h"},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27"],"y":[547,92,277,483,663,801,2631,576,2054,1659,2088,4736,3086,3987,3729,3144,3522,2703,3012,2516,2021,372,15133,6460,2055,2099,1918,1775,407,453,473,1450,16,214,508,405,433],"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#d62728","name":"China","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27"],"y":[8,6,11,10,21,8,20,12,14,34,23,13,8,24,15,38,52,26,18,96,19,47,15,57,90,95,116,103,96,105,171,306,370,371,337,577,926],"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#9467bd","name":"Rest of the World","type":"scatter","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="recovery-and-death-rates-by-country" class="section level3">
+<h3>Recovery and Death Rates by Country</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-97eb3fbfabaa988d06e5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-97eb3fbfabaa988d06e5">{"x":{"filter":"none","fillContainer":true,"data":[["Mainland China","South Korea","Italy","Iran","Japan","Singapore","Hong Kong","US","Germany","Kuwait","Thailand","France","Bahrain","Taiwan"],[78498,1766,655,245,214,93,92,60,46,43,40,38,33,32],[32898,22,45,49,22,62,24,6,16,null,22,11,null,5],[2744,13,17,26,4,null,2,null,null,null,null,2,null,1],[0.419093480088665,0.0124575311438279,0.0687022900763359,0.2,0.102803738317757,0.666666666666667,0.260869565217391,0.1,0.347826086956522,null,0.55,0.289473684210526,null,0.15625],[0.034956304619226,0.00736126840317101,0.0259541984732824,0.106122448979592,0.0186915887850467,null,0.0217391304347826,null,null,null,null,0.0526315789473684,null,0.03125]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th>Country<\/th>\n      <th>Confirmed<\/th>\n      <th>Recovered<\/th>\n      <th>Death<\/th>\n      <th>Recovery Rate<\/th>\n      <th>Death Rate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nDTWidget.formatPercentage(this, row, data, 4, 2, 3, ',', '.');\nDTWidget.formatPercentage(this, row, data, 5, 2, 3, ',', '.');\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="new-cases" class="section level1">
+<h1>New Cases</h1>
+<div id="column" class="section level2" data-width="500">
+<h2 data-width="500">Column</h2>
+<div id="distribution-of-new-cases" class="section level3">
+<h3>Distribution of New Cases</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+</div>
+<div id="chart-2" class="section level3">
+<h3>Chart 2</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
 </div>
 </div>
-<div id="tab-2" class="section level1">
-<h1>tab 2</h1>
+<div id="column-1" class="section level2" data-width="500">
+<h2 data-width="500">Column</h2>
+<div id="chart-3" class="section level3">
+<h3>Chart 3</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+</div>
+<div id="chart-4" class="section level3">
+<h3>Chart 4</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+</div>
+</div>
 </div>
 
 </div>
@@ -2637,7 +2714,7 @@ $(document).ready(function () {
   FlexDashboard.init({
     theme: "cosmo",
     fillPage: true,
-    orientation: "columns",
+    orientation: "rows",
     storyboard: false,
     defaultFigWidth: 576,
     defaultFigHeight: 460,
