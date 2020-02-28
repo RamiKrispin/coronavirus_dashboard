@@ -34,22 +34,25 @@ df <- coronavirus %>%
 plotly::plot_ly(data = df, 
                 x = ~ country, 
                 y = ~ confirmed, 
-                text =  ~ confirmed, 
-                textposition = 'auto',
+                # text =  ~ confirmed, 
+                # textposition = 'auto',
                 type = "bar", 
                 name = "Confirmed") %>%
   plotly::add_trace(y = ~ recovered, 
-                    text =  ~ recovered, 
-                    textposition = 'auto',
-                    name = "Recovered") %>%
+                    # text =  ~ recovered, 
+                    # textposition = 'auto',
+                    name = "Recovered",
+                    marker = list(color = "green")) %>%
   plotly::add_trace(y = ~ death, 
-                    text =  ~ death, 
-                    textposition = 'auto',
-                    name = "Death") %>%
+                    # text =  ~ death, 
+                    # textposition = 'auto',
+                    name = "Death",
+                    marker = list(color = "red")) %>%
   plotly::layout(barmode = 'stack',
                  yaxis = list(title = "Total Cases (log scaled)",
                               type = "log"),
-                 xaxis = list(title = "Country"))
+                 xaxis = list(title = "Country"),
+                 hovermode = "compare")
 
 
   
