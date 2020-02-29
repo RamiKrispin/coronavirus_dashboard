@@ -230,7 +230,7 @@ coronavirus %>%
 ```
 
 
-### Daily Distribution of Confirmed Cases - China vs. Rest of the World
+### Daily New Cases - China vs. Rest of the World
     
 ```{r}
 daily_confirmed <- coronavirus %>%
@@ -248,8 +248,16 @@ daily_confirmed <- coronavirus %>%
 
 daily_confirmed %>%
   plotly::plot_ly() %>% 
-  plotly::add_lines(x = ~ date, y = ~ China, name = "China") %>%
-  plotly::add_lines(x = ~ date, y = ~ `Rest of the World`, name = "Rest of the World") %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ China, 
+                    type = "scatter", 
+                    mode = "lines+markers",
+                    name = "China") %>% 
+  plotly::add_trace(x = ~ date, 
+                    y = ~ `Rest of the World`, 
+                    type = "scatter", 
+                    mode = "lines+markers",
+                    name = "Rest of the World") %>% 
   plotly::add_annotations(x = as.Date("2020-02-13"),
                           y = 15133,
                           text = paste("One time adjustment -", 
@@ -275,9 +283,9 @@ daily_confirmed %>%
                           ax = -70,
                           ay = -50) %>%
   plotly::layout(title = "",
+                 legend = list(x = 0.1, y = 0.9),
                  yaxis = list(title = "Number of New Cases"),
                  xaxis = list(title = "Date"),
-                 legend = list(orientation = 'h'),
                  # paper_bgcolor = "black",
                  # plot_bgcolor = "black",
                  # font = list(color = 'white'),
