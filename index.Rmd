@@ -21,7 +21,13 @@ df <- coronavirus %>%
                      values_from = total) %>%
   dplyr::arrange(-confirmed) %>%
   dplyr::ungroup() %>%
-  dplyr::mutate(country = factor(Country.Region, levels = Country.Region))
+  dplyr::mutate(country = dplyr::if_else(Country.Region == "United Arab Emirates", "UAE", Country.Region)) %>%
+  dplyr::mutate(country = dplyr::if_else(country == "Mainland China", "China", country)) %>%
+  dplyr::mutate(country = dplyr::if_else(country == "North Macedonia", "N.Macedonia", country)) %>%
+  dplyr::mutate(country = factor(country, levels = country))
+
+
+
 
 
 ```
@@ -35,20 +41,25 @@ Row
 
 ```{r}
 
-valueBox(value = sum(df$confirmed), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
+valueBox(value = paste(sum(df$confirmed)), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
 ```
 
 ### recovered {.value-box}
 
 ```{r}
-valueBox(value = sum(df$recovered, na.rm = TRUE), caption = "Recovered Cases", icon = "fas fa-heartbeat", color = "green")
+valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " cases (",
+                       round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
+                       "%)", sep = ""), 
+         caption = "Recovered Cases", icon = "fas fa-heartbeat", color = "green")
 ```
 
 ### death {.value-box}
 
 ```{r}
 
-valueBox(value = sum(df$death, na.rm = TRUE), 
+valueBox(value = paste(sum(df$death, na.rm = TRUE), " cases (",
+                       round(100 * sum(df$death, na.rm = TRUE) / sum(df$confirmed), 1), 
+                       "%)", sep = ""),
          caption = "Death Cases", 
          icon = "fas fa-heart-broken", 
          color = "red")
@@ -84,7 +95,14 @@ plotly::plot_ly(data = df,
                  yaxis = list(title = "Total Cases (log scaled)",
                               type = "log"),
                  xaxis = list(title = "Country"),
-                 hovermode = "compare")
+                 hovermode = "compare",
+                  margin =  list(
+                   # l = 60,
+                   # r = 40,
+                   b = 10,
+                   t = 10,
+                   pad = 2
+                 ))
 
 
   
