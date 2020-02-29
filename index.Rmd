@@ -247,17 +247,11 @@ daily_confirmed <- coronavirus %>%
 # Plotting the data
 
 daily_confirmed %>%
-  plotly::plot_ly(x = ~date, 
-                  y = ~ China, 
-                  name = 'China', 
-                  type = 'scatter', 
-                  mode = 'none', 
-                  stackgroup = 'one', 
-                  groupnorm = 'percent', 
-                  fillcolor = "#d62728") %>% 
-  plotly::add_trace(y = ~ `Rest of the World`, name = 'Rest of the World', fillcolor = "#9467bd") %>%
+  plotly::plot_ly() %>% 
+  plotly::add_lines(x = ~ date, y = ~ China, name = "China") %>%
+  plotly::add_lines(x = ~ date, y = ~ `Rest of the World`, name = "Rest of the World") %>%
   plotly::layout(title = "",
-                 yaxis = list(title = "Proportion of New Cases", ticksuffix = '%'),
+                 yaxis = list(title = "Number of New Cases"),
                  xaxis = list(title = "Date"),
                  legend = list(orientation = 'h'),
                  # paper_bgcolor = "black",
