@@ -310,12 +310,13 @@ coronavirus::coronavirus %>%
   dplyr::mutate(recover_rate = dplyr::if_else(is.na(recover_rate), 0, recover_rate),
                 death_rate = dplyr::if_else(is.na(death_rate), 0, death_rate)) %>%
   dplyr::ungroup() %>%
+  dplyr::mutate(confirmed_normal = as.numeric(confirmed) / max(as.numeric(confirmed))) %>%
   plotly::plot_ly(y = ~ round(100 * recover_rate, 1),
                   x = ~ round(100 * death_rate, 1),
-                  # size = ~ 100 * confirmed,
+                  size = ~ 100 * confirmed,
                   type = 'scatter', mode = 'markers',
-                  marker = list(size = ~ confirmed, opacity = 0.5),
                   color = ~ Country.Region,
+                  # marker = list(size = ~ log(confirmed) , opacity = 0.5),
                   hoverinfo = 'text',
                   text = ~paste("</br>", Country.Region, 
                                 "</br> Confirmed Cases: ", confirmed,
