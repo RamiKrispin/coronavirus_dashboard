@@ -250,6 +250,30 @@ daily_confirmed %>%
   plotly::plot_ly() %>% 
   plotly::add_lines(x = ~ date, y = ~ China, name = "China") %>%
   plotly::add_lines(x = ~ date, y = ~ `Rest of the World`, name = "Rest of the World") %>%
+  plotly::add_annotations(x = as.Date("2020-02-13"),
+                          y = 15133,
+                          text = paste("One time adjustment -", 
+                                       "<br>", 
+                                       "China modify the diagnostic criteria"),
+                          xref = "x",
+                          yref = "y",
+                          arrowhead = 7,
+                          arrowhead = 2,
+                          arrowsize = 1,
+                          showarrow = TRUE,
+                          ax = 50,
+                          ay = -40) %>%
+  plotly::add_annotations(x = as.Date("2020-02-26"),
+                          y = 577,
+                          text = paste("More new cases", "<br>", "outside of China"),
+                          xref = "x",
+                          yref = "y",
+                          arrowhead = 7,
+                          arrowhead = 2,
+                          arrowsize = 1,
+                          showarrow = TRUE,
+                          ax = -70,
+                          ay = -50) %>%
   plotly::layout(title = "",
                  yaxis = list(title = "Number of New Cases"),
                  xaxis = list(title = "Date"),
