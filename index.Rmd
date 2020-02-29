@@ -150,12 +150,14 @@ plotly::plot_ly(data = df_daily) %>%
                     y = ~ death_cum, 
                     type = "scatter", 
                     mode = 'lines+markers',
+                    name = "Death",
                     line = list(color = "red"),
                     marker = list(color = "red")) %>%
   plotly::layout(title = "",
                  yaxis = list(title = "Cumulative Number of Cases"),
                  xaxis = list(title = "Date"),
-                 legend = list(x = 0.1, y = 0.9))
+                 legend = list(x = 0.1, y = 0.9),
+                 hovermode = "compare")
   
 
 ```
