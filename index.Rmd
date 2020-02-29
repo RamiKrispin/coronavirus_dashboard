@@ -295,10 +295,37 @@ daily_confirmed %>%
 Column {data-width=600}
 -------------------------------------
    
-### Chart 3
+### Recovery and Death Rates for Countries with at Least 25 Cases
 
 ```{r}
-
+coronavirus::coronavirus %>% 
+  # dplyr::filter(Country.Region != "Others") %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total_cases = sum(cases)) %>%
+  tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
+  dplyr::arrange(- confirmed) %>%
+  dplyr::filter(confirmed >= 25) %>%
+  dplyr::mutate(recover_rate = recovered / confirmed,
+                death_rate = death / confirmed) %>% 
+  dplyr::mutate(recover_rate = dplyr::if_else(is.na(recover_rate), 0, recover_rate),
+                death_rate = dplyr::if_else(is.na(death_rate), 0, death_rate)) %>%
+  dplyr::ungroup() %>%
+  plotly::plot_ly(y = ~ round(100 * recover_rate, 1),
+                  x = ~ round(100 * death_rate, 1),
+                  # size = ~ 100 * confirmed,
+                  type = 'scatter', mode = 'markers',
+                  marker = list(size = ~ confirmed, opacity = 0.5),
+                  color = ~ Country.Region,
+                  hoverinfo = 'text',
+                  text = ~paste("</br>", Country.Region, 
+                                "</br> Confirmed Cases: ", confirmed,
+                                "</br> Recovery Rate: ", paste(round(100 * recover_rate, 1), "%", sep = ""),
+                                "</br> Death Rate: ",  paste(round(100 * death_rate, 1), "%", sep = ""))
+                 ) %>%
+  plotly::layout(yaxis = list(title = "Recovery Rate", ticksuffix = "%"),
+                xaxis = list(title = "Death Rate", ticksuffix = "%", 
+                             dtick = 1, 
+                             tick0 = 0))
   
 ```   
  
