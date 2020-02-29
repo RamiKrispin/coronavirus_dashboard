@@ -316,7 +316,7 @@ coronavirus::coronavirus %>%
                   size = ~ 100 * confirmed,
                   type = 'scatter', mode = 'markers',
                   color = ~ Country.Region,
-                  # marker = list(size = ~ log(confirmed) , opacity = 0.5),
+                  marker = list(sizemode = 'diameter' , opacity = 0.5),
                   hoverinfo = 'text',
                   text = ~paste("</br>", Country.Region, 
                                 "</br> Confirmed Cases: ", confirmed,
