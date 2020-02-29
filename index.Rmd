@@ -124,7 +124,7 @@ plotly::plot_ly(data = df,
 
 ```
 
-Row
+Row {data-width=400}
 -----------------------------------------------------------------------
 
 
@@ -256,6 +256,19 @@ Column {data-width=500}
 ```{r}
 
 ```
+
+Data
+=======================================================================
+
+```{r}
+coronavirus %>% 
+  dplyr::select(Date = date, Province = Province.State, Country = Country.Region, `Case Type` = type, `Number of Cases` = cases) %>%
+  DT::datatable(rownames = FALSE,
+            options = list(searchHighlight = TRUE, 
+                           pageLength = 20), filter = 'top')
+```
+
+
 
 About
 =======================================================================
