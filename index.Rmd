@@ -184,7 +184,7 @@ df_summary %>%
 ```
 
 
-New Cases
+Trends
 =======================================================================
 
 
@@ -194,7 +194,24 @@ Column {data-width=500}
 ### Distribution of New Cases 
     
 ```{r}
-
+max_date <- max(coronavirus$date)
+coronavirus %>% 
+  dplyr::filter(type == "confirmed", date == max_date) %>%
+  dplyr::group_by(Country.Region) %>%
+  dplyr::summarise(total_cases = sum(cases)) %>%
+  dplyr::arrange(-total_cases) %>%
+  dplyr::mutate(country = factor(Country.Region, levels = Country.Region)) %>%
+  dplyr::ungroup() %>%
+  plotly::plot_ly(labels = ~ country, 
+          values = ~ total_cases,
+          type = "pie",
+          textposition = 'inside',
+        textinfo = 'label+percent',
+        insidetextfont = list(color = '#FFFFFF'),
+        hoverinfo = 'text',
+        text = ~ paste(country, "<br />",
+                     "Number of confirmed cases: ", total_cases, sep = "")) %>%
+  plotly::layout(title = paste("Distribution of New Cases by Country (", max_date, ")", sep = ""))
 ```
 
 
