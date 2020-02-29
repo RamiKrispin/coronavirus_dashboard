@@ -24,11 +24,12 @@ df <- coronavirus %>%
   dplyr::mutate(country = dplyr::if_else(Country.Region == "United Arab Emirates", "UAE", Country.Region)) %>%
   dplyr::mutate(country = dplyr::if_else(country == "Mainland China", "China", country)) %>%
   dplyr::mutate(country = dplyr::if_else(country == "North Macedonia", "N.Macedonia", country)) %>%
+  dplyr::mutate(country = trimws(country)) %>%
   dplyr::mutate(country = factor(country, levels = country))
 
 
 
-
+df1 <- coronavirus %>% dplyr::filter(date == max(date))
 
 ```
 
@@ -94,7 +95,7 @@ plotly::plot_ly(data = df,
   plotly::layout(barmode = 'stack',
                  yaxis = list(title = "Total Cases (log scaled)",
                               type = "log"),
-                 xaxis = list(title = "Country"),
+                 xaxis = list(title = ""),
                  hovermode = "compare",
                   margin =  list(
                    # l = 60,
@@ -162,17 +163,19 @@ daily_confirmed %>%
 ### Recovery and Death Rates by Country
     
 ```{r}
-coronavirus::coronavirus %>% 
-  dplyr::filter(Country.Region != "Others") %>%
+df_summary <- coronavirus::coronavirus %>% 
+  # dplyr::filter(Country.Region != "Others") %>%
   dplyr::group_by(Country.Region, type) %>%
   dplyr::summarise(total_cases = sum(cases)) %>%
   tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
   dplyr::arrange(- confirmed) %>%
   dplyr::filter(confirmed >= 25) %>%
   dplyr::mutate(recover_rate = recovered / confirmed,
-         death_rate = death / confirmed)  %>%
+         death_rate = death / confirmed)  
+df_summary %>%
   DT::datatable(rownames = FALSE,
-            colnames = c("Country", "Confirmed", "Recovered", "Death", "Recovery Rate", "Death Rate")) %>%
+            colnames = c("Country", "Confirmed", "Recovered", "Death", "Recovery Rate", "Death Rate"),
+            options = list(pageLength = nrow(df_summary), dom = 'tip')) %>%
   DT::formatPercentage("recover_rate", 2) %>%
   DT::formatPercentage("death_rate", 2) 
 ```
