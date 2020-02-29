@@ -21,6 +21,9 @@
 window.FlexDashboardComponents = [];
 </script>
 
+<script id="flexdashboard-navbar" type="application/json">
+[{"icon":"fa-share-alt","items":[{"title":"Twitter","icon":"fa-twitter"},{"title":"Facebook","icon":"fa-facebook"},{"title":"Google+","icon":"fa-google-plus"},{"title":"LinkedIn","icon":"fa-linkedin"},{"title":"Pinterest","icon":"fa-pinterest"}]},{"title":"Source Code","icon":"fa-code","href":"source_embed","align":"right"}]
+</script>
 <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -30,6 +33,10 @@ window.FlexDashboardComponents = [];
 <script src="site_libs/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/featherlight-1.3.5/featherlight.min.css" rel="stylesheet" />
+<script src="site_libs/featherlight-1.3.5/featherlight.min.js"></script>
+<link href="site_libs/prism-1.4.1/prism.css" rel="stylesheet" />
+<script src="site_libs/prism-1.4.1/prism.js"></script>
 <script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="site_libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
@@ -2633,27 +2640,27 @@ window.FlexDashboardComponents.push({
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
-<div id="htmlwidget-b8130d1736f1e07a644a" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b8130d1736f1e07a644a">{"x":{"visdat":{"ff7c7e9b2284":["function () ","plotlyVisDat"]},"cur_data":"ff7c7e9b2284","attrs":{"ff7c7e9b2284":{"x":{},"y":{},"name":"Confirmed","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"ff7c7e9b2284.1":{"x":{},"y":{},"name":"Recovered","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"green"},"inherit":true},"ff7c7e9b2284.2":{"x":{},"y":{},"name":"Death","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"red"},"inherit":true}},"layout":{"margin":{"b":10,"l":60,"t":10,"r":10,"pad":2},"barmode":"stack","yaxis":{"domain":[0,1],"automargin":true,"title":"Total Cases (log scaled)","type":"log"},"xaxis":{"domain":[0,1],"automargin":true,"title":"","type":"category","categoryorder":"array","categoryarray":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Kuwait","Thailand","Bahrain","Taiwan","Spain","Australia","Malaysia","UK","UAE","Vietnam","Canada","Macau","Switzerland","Iraq","Sweden","Norway","Croatia","Greece","Israel","Oman","Austria","India","Philippines","Romania","Finland","Lebanon","Pakistan","Russia","Azerbaijan","Afghanistan","Algeria","Belarus","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Iceland","Lithuania","Mexico","Nepal","Netherlands","New Zealand","Nigeria","North Ireland","N.Macedonia","San Marino","Sri Lanka"]},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Kuwait","Thailand","Bahrain","Taiwan","Spain","Australia","Malaysia","UK","UAE","Vietnam","Canada","Macau","Switzerland","Iraq","Sweden","Norway","Croatia","Greece","Israel","Oman","Austria","India","Philippines","Romania","Finland","Lebanon","Pakistan","Russia","Azerbaijan","Afghanistan","Algeria","Belarus","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Iceland","Lithuania","Mexico","Nepal","Netherlands","New Zealand","Nigeria","North Ireland","N.Macedonia","San Marino","Sri Lanka"],"y":[78824,2337,888,705,388,228,94,93,62,57,48,45,41,36,34,32,23,23,20,19,16,14,10,8,7,7,6,5,4,4,4,3,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Confirmed","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Thailand","Taiwan","Spain","Australia","Malaysia","UK","UAE","Vietnam","Canada","Macau","Israel","India","Philippines","Finland","Russia","Belgium","Cambodia","Egypt","Nepal","Sri Lanka"],"y":[36291,22,46,10,73,22,30,62,7,11,16,28,6,2,11,18,8,5,16,6,8,1,3,1,1,2,1,1,1,1,1],"name":"Recovered","type":"bar","marker":{"color":"green","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","France","Taiwan","Philippines"],"y":[2788,13,21,1,34,4,2,2,1,1],"name":"Death","type":"bar","marker":{"color":"red","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-44ca68a60913452bb5b3" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-44ca68a60913452bb5b3">{"x":{"visdat":{"533077770681":["function () ","plotlyVisDat"]},"cur_data":"533077770681","attrs":{"533077770681":{"x":{},"y":{},"name":"Confirmed","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"533077770681.1":{"x":{},"y":{},"name":"Recovered","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"green"},"inherit":true},"533077770681.2":{"x":{},"y":{},"name":"Death","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","marker":{"color":"red"},"inherit":true}},"layout":{"margin":{"b":10,"l":60,"t":10,"r":10,"pad":2},"barmode":"stack","yaxis":{"domain":[0,1],"automargin":true,"title":"Total Cases (log scaled)","type":"log"},"xaxis":{"domain":[0,1],"automargin":true,"title":"","type":"category","categoryorder":"array","categoryarray":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Kuwait","Thailand","Bahrain","Taiwan","Spain","Australia","Malaysia","UK","UAE","Vietnam","Canada","Macau","Switzerland","Iraq","Sweden","Norway","Croatia","Greece","Israel","Oman","Austria","India","Philippines","Romania","Finland","Lebanon","Pakistan","Russia","Azerbaijan","Afghanistan","Algeria","Belarus","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Iceland","Lithuania","Mexico","Nepal","Netherlands","New Zealand","Nigeria","North Ireland","N.Macedonia","San Marino","Sri Lanka"]},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Kuwait","Thailand","Bahrain","Taiwan","Spain","Australia","Malaysia","UK","UAE","Vietnam","Canada","Macau","Switzerland","Iraq","Sweden","Norway","Croatia","Greece","Israel","Oman","Austria","India","Philippines","Romania","Finland","Lebanon","Pakistan","Russia","Azerbaijan","Afghanistan","Algeria","Belarus","Belgium","Brazil","Cambodia","Denmark","Egypt","Estonia","Georgia","Iceland","Lithuania","Mexico","Nepal","Netherlands","New Zealand","Nigeria","North Ireland","N.Macedonia","San Marino","Sri Lanka"],"y":[78824,2337,888,705,388,228,94,93,62,57,48,45,41,36,34,32,23,23,20,19,16,14,10,8,7,7,6,5,4,4,4,3,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"name":"Confirmed","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Thailand","Taiwan","Spain","Australia","Malaysia","UK","UAE","Vietnam","Canada","Macau","Israel","India","Philippines","Finland","Russia","Belgium","Cambodia","Egypt","Nepal","Sri Lanka"],"y":[36291,22,46,10,73,22,30,62,7,11,16,28,6,2,11,18,8,5,16,6,8,1,3,1,1,2,1,1,1,1,1],"name":"Recovered","type":"bar","marker":{"color":"green","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["China","South Korea","Italy","Others","Iran","Japan","Hong Kong","France","Taiwan","Philippines"],"y":[2788,13,21,1,34,4,2,2,1,1],"name":"Death","type":"bar","marker":{"color":"red","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="row-2" class="section level2">
 <h2>Row</h2>
-<div id="coronavirus-daily-confirmed-cases-dist---china-vs.-rest-of-the-world" class="section level3">
-<h3>Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World</h3>
+<div id="daily-cumulative-cases-by-type" class="section level3">
+<h3>Daily Cumulative Cases by Type</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
-<div id="htmlwidget-d1c9e2248dea5ccc591f" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d1c9e2248dea5ccc591f">{"x":{"visdat":{"ff7cdcb03f":["function () ","plotlyVisDat"]},"cur_data":"ff7cdcb03f","attrs":{"ff7cdcb03f":{"x":{},"y":{},"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#d62728","name":"China","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"ff7cdcb03f.1":{"x":{},"y":{},"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#9467bd","name":"Rest of the World","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":10,"l":60,"t":10,"r":10,"pad":2},"title":"","yaxis":{"domain":[0,1],"automargin":true,"title":"Proportion of New Cases","ticksuffix":"%"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Date"},"legend":{"orientation":"h"},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[547,92,277,483,663,801,2631,576,2054,1659,2088,4736,3086,3987,3729,3144,3522,2703,3012,2516,2021,372,15133,6460,2055,2099,1918,1775,407,453,473,1450,16,214,508,405,433,326],"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#d62728","name":"China","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[8,6,11,10,21,8,20,12,14,34,23,13,8,24,15,38,52,26,18,96,19,47,15,57,90,95,116,103,96,105,171,306,370,371,337,577,926,1042],"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#9467bd","name":"Rest of the World","type":"scatter","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bb936bbe41477e9ea07a" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bb936bbe41477e9ea07a">{"x":{"visdat":{"53307e132c42":["function () ","plotlyVisDat"]},"cur_data":"53307e132c42","attrs":{"53307e132c42":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Confirmed","line":{"color":"#1f77b4"},"inherit":true},"53307e132c42.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Recovered","line":{"color":"green"},"marker":{"color":"green"},"inherit":true},"53307e132c42.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","line":{"color":"red"},"marker":{"color":"red"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"","yaxis":{"domain":[0,1],"automargin":true,"title":"Cumulative Number of Cases"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Date"},"legend":{"x":0.1,"y":0.9},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[555,653,941,1434,2118,2927,5578,6166,8234,9927,12038,16787,19881,23892,27636,30818,34392,37121,40151,42763,44803,45222,60370,66887,69032,71226,73260,75138,75641,76199,76843,78599,78985,79570,80415,81397,82756,84124],"type":"scatter","mode":"lines+markers","name":"Confirmed","line":{"color":"#1f77b4"},"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[28,30,36,39,52,61,107,126,143,222,284,472,623,852,1124,1487,2011,2616,3244,3946,4683,5150,6295,8058,9395,10865,12583,14352,16121,18177,18890,22886,23394,25227,27905,30384,33277,36711],"type":"scatter","mode":"lines+markers","name":"Recovered","line":{"color":"green"},"marker":{"color":"green","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[17,18,26,42,56,82,131,133,171,213,259,362,426,492,564,634,719,806,906,1013,1113,1118,1371,1523,1666,1770,1868,2007,2122,2247,2251,2458,2469,2629,2708,2770,2814,2867],"type":"scatter","mode":"lines+markers","line":{"color":"red"},"marker":{"color":"red","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="recovery-and-death-rates-by-country" class="section level3">
 <h3>Recovery and Death Rates by Country</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
-<div id="htmlwidget-ca0b0fff2606901d01ae" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ca0b0fff2606901d01ae">{"x":{"filter":"none","fillContainer":true,"data":[["Mainland China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Kuwait","Thailand","Bahrain","Taiwan","Spain"],[78824,2337,888,705,388,228,94,93,62,57,48,45,41,36,34,32],[36291,22,46,10,73,22,30,62,7,11,16,null,28,null,6,2],[2788,13,21,1,34,4,2,null,null,2,null,null,null,null,1,null],[0.460405460265909,0.0094137783483098,0.0518018018018018,0.0141843971631206,0.188144329896907,0.0964912280701754,0.319148936170213,0.666666666666667,0.112903225806452,0.192982456140351,0.333333333333333,null,0.682926829268293,null,0.176470588235294,0.0625],[0.0353699380899219,0.00556268720581943,0.0236486486486486,0.00141843971631206,0.0876288659793814,0.0175438596491228,0.0212765957446809,null,null,0.0350877192982456,null,null,null,null,0.0294117647058824,null]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th>Country<\/th>\n      <th>Confirmed<\/th>\n      <th>Recovered<\/th>\n      <th>Death<\/th>\n      <th>Recovery Rate<\/th>\n      <th>Death Rate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":16,"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,16,25,50,100],"rowCallback":"function(row, data) {\nDTWidget.formatPercentage(this, row, data, 4, 2, 3, ',', '.');\nDTWidget.formatPercentage(this, row, data, 5, 2, 3, ',', '.');\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div id="htmlwidget-b1f40899ec63be22fc0d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b1f40899ec63be22fc0d">{"x":{"filter":"none","fillContainer":true,"data":[["Mainland China","South Korea","Italy","Others","Iran","Japan","Hong Kong","Singapore","US","France","Germany","Kuwait","Thailand","Bahrain","Taiwan","Spain"],[78824,2337,888,705,388,228,94,93,62,57,48,45,41,36,34,32],[36291,22,46,10,73,22,30,62,7,11,16,null,28,null,6,2],[2788,13,21,1,34,4,2,null,null,2,null,null,null,null,1,null],[0.460405460265909,0.0094137783483098,0.0518018018018018,0.0141843971631206,0.188144329896907,0.0964912280701754,0.319148936170213,0.666666666666667,0.112903225806452,0.192982456140351,0.333333333333333,null,0.682926829268293,null,0.176470588235294,0.0625],[0.0353699380899219,0.00556268720581943,0.0236486486486486,0.00141843971631206,0.0876288659793814,0.0175438596491228,0.0212765957446809,null,null,0.0350877192982456,null,null,null,null,0.0294117647058824,null]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th>Country<\/th>\n      <th>Confirmed<\/th>\n      <th>Recovered<\/th>\n      <th>Death<\/th>\n      <th>Recovery Rate<\/th>\n      <th>Death Rate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":16,"dom":"tip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,16,25,50,100],"rowCallback":"function(row, data) {\nDTWidget.formatPercentage(this, row, data, 4, 2, 3, ',', '.');\nDTWidget.formatPercentage(this, row, data, 5, 2, 3, ',', '.');\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -2667,11 +2674,13 @@ window.FlexDashboardComponents.push({
 
 </div>
 </div>
-<div id="chart-2" class="section level3">
-<h3>Chart 2</h3>
+<div id="coronavirus-daily-confirmed-cases-dist---china-vs.-rest-of-the-world" class="section level3">
+<h3>Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World</h3>
 <div class="knitr-options" data-fig-width="576" data-fig-height="460">
 
 </div>
+<div id="htmlwidget-632c2abc82a5da6d03a0" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-632c2abc82a5da6d03a0">{"x":{"visdat":{"5330db55dfa":["function () ","plotlyVisDat"]},"cur_data":"5330db55dfa","attrs":{"5330db55dfa":{"x":{},"y":{},"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#d62728","name":"China","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"5330db55dfa.1":{"x":{},"y":{},"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#9467bd","name":"Rest of the World","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":10,"l":60,"t":10,"r":10,"pad":2},"title":"","yaxis":{"domain":[0,1],"automargin":true,"title":"Proportion of New Cases","ticksuffix":"%"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Date"},"legend":{"orientation":"h"},"hovermode":"compare","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[547,92,277,483,663,801,2631,576,2054,1659,2088,4736,3086,3987,3729,3144,3522,2703,3012,2516,2021,372,15133,6460,2055,2099,1918,1775,407,453,473,1450,16,214,508,405,433,326],"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#d62728","name":"China","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2020-01-22","2020-01-23","2020-01-24","2020-01-25","2020-01-26","2020-01-27","2020-01-28","2020-01-29","2020-01-30","2020-01-31","2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28"],"y":[8,6,11,10,21,8,20,12,14,34,23,13,8,24,15,38,52,26,18,96,19,47,15,57,90,95,116,103,96,105,171,306,370,371,337,577,926,1042],"mode":"none","stackgroup":"one","groupnorm":"percent","fillcolor":"#9467bd","name":"Rest of the World","type":"scatter","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="column-1" class="section level2" data-width="500">
@@ -2689,6 +2698,9 @@ window.FlexDashboardComponents.push({
 </div>
 </div>
 </div>
+</div>
+<div id="about" class="section level1">
+<h1>About</h1>
 </div>
 
 </div>
@@ -2709,6 +2721,269 @@ $(document).ready(function () {
 });
 </script>
 
+<div id="flexdashboard-source-code">
+<pre class="line-numbers"><code class="language-r">---
+title: "Coronavirus"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(coronavirus)
+data(coronavirus)
+
+`%>%` <- magrittr::`%>%`
+
+
+df <- coronavirus %>% 
+  # dplyr::filter(date == max(date)) %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total = sum(cases)) %>%
+  tidyr::pivot_wider(names_from =  type, 
+                     values_from = total) %>%
+  dplyr::arrange(-confirmed) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(country = dplyr::if_else(Country.Region == "United Arab Emirates", "UAE", Country.Region)) %>%
+  dplyr::mutate(country = dplyr::if_else(country == "Mainland China", "China", country)) %>%
+  dplyr::mutate(country = dplyr::if_else(country == "North Macedonia", "N.Macedonia", country)) %>%
+  dplyr::mutate(country = trimws(country)) %>%
+  dplyr::mutate(country = factor(country, levels = country))
+
+df_daily <- coronavirus::coronavirus %>% 
+  dplyr::group_by(date, type) %>%
+  dplyr::summarise(total = sum(cases, na.rm = TRUE)) %>%
+  tidyr::pivot_wider(names_from = type,
+                     values_from = total) %>%
+  dplyr::arrange(date) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(confirmed_cum = cumsum(confirmed),
+                death_cum = cumsum(death),
+                recovered_cum = cumsum(recovered))
+
+df1 <- coronavirus %>% dplyr::filter(date == max(date))
+
+```
+
+Summary
+=======================================================================
+Row
+-----------------------------------------------------------------------
+
+### confirmed {.value-box}
+
+```{r}
+
+valueBox(value = paste(sum(df$confirmed)), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
+```
+
+### recovered {.value-box}
+
+```{r}
+valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " cases (",
+                       round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
+                       "%)", sep = ""), 
+         caption = "Recovered Cases", icon = "fas fa-heartbeat", 
+         color = "green")
+```
+
+### death {.value-box}
+
+```{r}
+
+valueBox(value = paste(sum(df$death, na.rm = TRUE), " cases (",
+                       round(100 * sum(df$death, na.rm = TRUE) / sum(df$confirmed), 1), 
+                       "%)", sep = ""),
+         caption = "Death Cases", 
+         icon = "fas fa-heart-broken", 
+         color = "red")
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+### Total Cases by Type/Country
+
+```{r daily_summary}
+
+
+plotly::plot_ly(data = df, 
+                x = ~ country, 
+                y = ~ confirmed, 
+                # text =  ~ confirmed, 
+                # textposition = 'auto',
+                type = "bar", 
+                name = "Confirmed") %>%
+  plotly::add_trace(y = ~ recovered, 
+                    # text =  ~ recovered, 
+                    # textposition = 'auto',
+                    name = "Recovered",
+                    marker = list(color = "green")) %>%
+  plotly::add_trace(y = ~ death, 
+                    # text =  ~ death, 
+                    # textposition = 'auto',
+                    name = "Death",
+                    marker = list(color = "red")) %>%
+  plotly::layout(barmode = 'stack',
+                 yaxis = list(title = "Total Cases (log scaled)",
+                              type = "log"),
+                 xaxis = list(title = ""),
+                 hovermode = "compare",
+                  margin =  list(
+                   # l = 60,
+                   # r = 40,
+                   b = 10,
+                   t = 10,
+                   pad = 2
+                 ))
+
+
+  
+
+
+```
+
+Row
+-----------------------------------------------------------------------
+
+
+### Daily Cumulative Cases by Type
+    
+```{r}
+
+plotly::plot_ly(data = df_daily) %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ confirmed_cum, 
+                    type = "scatter", 
+                    mode = "lines+markers",
+                    name = "Confirmed",
+                    line = list(color = "#1f77b4")) %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ recovered_cum, 
+                    type = "scatter", 
+                    mode = "lines+markers",
+                    name = "Recovered",
+                    line = list(color = "green"),
+                    marker = list(color = "green")) %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ death_cum, 
+                    type = "scatter", 
+                    mode = 'lines+markers',
+                    line = list(color = "red"),
+                    marker = list(color = "red")) %>%
+  plotly::layout(title = "",
+                 yaxis = list(title = "Cumulative Number of Cases"),
+                 xaxis = list(title = "Date"),
+                 legend = list(x = 0.1, y = 0.9))
+  
+
+```
+
+
+### Recovery and Death Rates by Country
+    
+```{r}
+df_summary <- coronavirus::coronavirus %>% 
+  # dplyr::filter(Country.Region != "Others") %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total_cases = sum(cases)) %>%
+  tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
+  dplyr::arrange(- confirmed) %>%
+  dplyr::filter(confirmed >= 25) %>%
+  dplyr::mutate(recover_rate = recovered / confirmed,
+         death_rate = death / confirmed)  
+df_summary %>%
+  DT::datatable(rownames = FALSE,
+            colnames = c("Country", "Confirmed", "Recovered", "Death", "Recovery Rate", "Death Rate"),
+            options = list(pageLength = nrow(df_summary), dom = 'tip')) %>%
+  DT::formatPercentage("recover_rate", 2) %>%
+  DT::formatPercentage("death_rate", 2) 
+```
+
+
+New Cases
+=======================================================================
+
+
+Column {data-width=500}
+-------------------------------------
+    
+### Distribution of New Cases 
+    
+```{r}
+
+```
+
+
+### Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World
+    
+```{r}
+daily_confirmed <- coronavirus %>%
+  dplyr::filter(type == "confirmed") %>%
+  dplyr::mutate(country = dplyr::if_else(Country.Region == "Mainland China", 
+                                         "China", 
+                                         "Rest of the World")) %>%
+  dplyr::group_by(date, country) %>%
+  dplyr::summarise(total = sum(cases)) %>% 
+  dplyr::ungroup() %>%
+  tidyr::pivot_wider(names_from = country, values_from = total) 
+
+#----------------------------------------
+# Plotting the data
+
+daily_confirmed %>%
+  plotly::plot_ly(x = ~date, 
+                  y = ~ China, 
+                  name = 'China', 
+                  type = 'scatter', 
+                  mode = 'none', 
+                  stackgroup = 'one', 
+                  groupnorm = 'percent', 
+                  fillcolor = "#d62728") %>% 
+  plotly::add_trace(y = ~ `Rest of the World`, name = 'Rest of the World', fillcolor = "#9467bd") %>%
+  plotly::layout(title = "",
+                 yaxis = list(title = "Proportion of New Cases", ticksuffix = '%'),
+                 xaxis = list(title = "Date"),
+                 legend = list(orientation = 'h'),
+                 # paper_bgcolor = "black",
+                 # plot_bgcolor = "black",
+                 # font = list(color = 'white'),
+                 hovermode = "compare",
+                 margin =  list(
+                   # l = 60,
+                   # r = 40,
+                   b = 10,
+                   t = 10,
+                   pad = 2
+                 ))
+
+```
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Chart 3
+
+```{r}
+
+```   
+ 
+### Chart 4
+    
+```{r}
+
+```
+
+About
+=======================================================================
+
+</code></pre>
+</div>
 <script type="text/javascript">
 $(document).ready(function () {
   FlexDashboard.init({

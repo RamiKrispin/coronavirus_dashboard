@@ -3,6 +3,8 @@ title: "Coronavirus"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
+    social: menu
+    source_code: embed
     vertical_layout: fill
 ---
 
@@ -10,9 +12,10 @@ output:
 library(flexdashboard)
 library(coronavirus)
 data(coronavirus)
+
 `%>%` <- magrittr::`%>%`
 
-library(coronavirus)
+
 df <- coronavirus %>% 
   # dplyr::filter(date == max(date)) %>%
   dplyr::group_by(Country.Region, type) %>%
@@ -27,7 +30,16 @@ df <- coronavirus %>%
   dplyr::mutate(country = trimws(country)) %>%
   dplyr::mutate(country = factor(country, levels = country))
 
-
+df_daily <- coronavirus::coronavirus %>% 
+  dplyr::group_by(date, type) %>%
+  dplyr::summarise(total = sum(cases, na.rm = TRUE)) %>%
+  tidyr::pivot_wider(names_from = type,
+                     values_from = total) %>%
+  dplyr::arrange(date) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(confirmed_cum = cumsum(confirmed),
+                death_cum = cumsum(death),
+                recovered_cum = cumsum(recovered))
 
 df1 <- coronavirus %>% dplyr::filter(date == max(date))
 
@@ -51,7 +63,8 @@ valueBox(value = paste(sum(df$confirmed)), caption = "Confirmed Cases", icon = "
 valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " cases (",
                        round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
-         caption = "Recovered Cases", icon = "fas fa-heartbeat", color = "green")
+         caption = "Recovered Cases", icon = "fas fa-heartbeat", 
+         color = "green")
 ```
 
 ### death {.value-box}
@@ -115,6 +128,74 @@ Row
 -----------------------------------------------------------------------
 
 
+### Daily Cumulative Cases by Type
+    
+```{r}
+
+plotly::plot_ly(data = df_daily) %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ confirmed_cum, 
+                    type = "scatter", 
+                    mode = "lines+markers",
+                    name = "Confirmed",
+                    line = list(color = "#1f77b4")) %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ recovered_cum, 
+                    type = "scatter", 
+                    mode = "lines+markers",
+                    name = "Recovered",
+                    line = list(color = "green"),
+                    marker = list(color = "green")) %>%
+  plotly::add_trace(x = ~ date, 
+                    y = ~ death_cum, 
+                    type = "scatter", 
+                    mode = 'lines+markers',
+                    line = list(color = "red"),
+                    marker = list(color = "red")) %>%
+  plotly::layout(title = "",
+                 yaxis = list(title = "Cumulative Number of Cases"),
+                 xaxis = list(title = "Date"),
+                 legend = list(x = 0.1, y = 0.9))
+  
+
+```
+
+
+### Recovery and Death Rates by Country
+    
+```{r}
+df_summary <- coronavirus::coronavirus %>% 
+  # dplyr::filter(Country.Region != "Others") %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total_cases = sum(cases)) %>%
+  tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
+  dplyr::arrange(- confirmed) %>%
+  dplyr::filter(confirmed >= 25) %>%
+  dplyr::mutate(recover_rate = recovered / confirmed,
+         death_rate = death / confirmed)  
+df_summary %>%
+  DT::datatable(rownames = FALSE,
+            colnames = c("Country", "Confirmed", "Recovered", "Death", "Recovery Rate", "Death Rate"),
+            options = list(pageLength = nrow(df_summary), dom = 'tip')) %>%
+  DT::formatPercentage("recover_rate", 2) %>%
+  DT::formatPercentage("death_rate", 2) 
+```
+
+
+New Cases
+=======================================================================
+
+
+Column {data-width=500}
+-------------------------------------
+    
+### Distribution of New Cases 
+    
+```{r}
+
+```
+
+
 ### Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World
     
 ```{r}
@@ -158,48 +239,6 @@ daily_confirmed %>%
                  ))
 
 ```
-
-
-### Recovery and Death Rates by Country
-    
-```{r}
-df_summary <- coronavirus::coronavirus %>% 
-  # dplyr::filter(Country.Region != "Others") %>%
-  dplyr::group_by(Country.Region, type) %>%
-  dplyr::summarise(total_cases = sum(cases)) %>%
-  tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
-  dplyr::arrange(- confirmed) %>%
-  dplyr::filter(confirmed >= 25) %>%
-  dplyr::mutate(recover_rate = recovered / confirmed,
-         death_rate = death / confirmed)  
-df_summary %>%
-  DT::datatable(rownames = FALSE,
-            colnames = c("Country", "Confirmed", "Recovered", "Death", "Recovery Rate", "Death Rate"),
-            options = list(pageLength = nrow(df_summary), dom = 'tip')) %>%
-  DT::formatPercentage("recover_rate", 2) %>%
-  DT::formatPercentage("death_rate", 2) 
-```
-
-
-New Cases
-=======================================================================
-
-
-Column {data-width=500}
--------------------------------------
-    
-### Distribution of New Cases 
-    
-```{r}
-
-```
-
-
-### Chart 2
-
-```{r}
-
-```  
    
 Column {data-width=500}
 -------------------------------------
@@ -216,4 +255,6 @@ Column {data-width=500}
 
 ```
 
+About
+=======================================================================
 
