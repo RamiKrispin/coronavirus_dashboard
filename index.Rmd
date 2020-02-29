@@ -188,7 +188,7 @@ Trends
 =======================================================================
 
 
-Column {data-width=500}
+Column {data-width=400}
 -------------------------------------
     
 ### Distribution of New Cases 
@@ -204,18 +204,33 @@ coronavirus %>%
   dplyr::ungroup() %>%
   plotly::plot_ly(labels = ~ country, 
           values = ~ total_cases,
-          type = "pie",
+          # type = "pie",
           textposition = 'inside',
         textinfo = 'label+percent',
         insidetextfont = list(color = '#FFFFFF'),
         hoverinfo = 'text',
         text = ~ paste(country, "<br />",
                      "Number of confirmed cases: ", total_cases, sep = "")) %>%
-  plotly::layout(title = paste("Distribution of New Cases by Country (", max_date, ")", sep = ""))
+  plotly::add_pie(hole = 0.6) %>%
+  plotly::layout(title = "",
+                 margin =  list(
+                   l = 10,
+                   r = 10,
+                   b = 10,
+                   t = 10,
+                   pad = 2
+                 )) %>%
+  plotly::add_annotations(text = paste("During", max_date, sep = " "),
+                          xref = "paper",
+                          yref = "paper",
+                          showarrow = FALSE,
+                          x = 0,
+                          y = 1) %>%
+  plotly::hide_legend()
 ```
 
 
-### Coronavirus Daily Confirmed Cases Dist - China vs. Rest of the World
+### Daily Distribution of Confirmed Cases - China vs. Rest of the World
     
 ```{r}
 daily_confirmed <- coronavirus %>%
@@ -259,7 +274,7 @@ daily_confirmed %>%
 
 ```
    
-Column {data-width=500}
+Column {data-width=600}
 -------------------------------------
    
 ### Chart 3
