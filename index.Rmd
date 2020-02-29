@@ -314,6 +314,7 @@ coronavirus::coronavirus %>%
   plotly::plot_ly(y = ~ round(100 * recover_rate, 1),
                   x = ~ round(100 * death_rate, 1),
                   size = ~ 100 * confirmed,
+                  sizes = c(20, 50),
                   type = 'scatter', mode = 'markers',
                   color = ~ Country.Region,
                   marker = list(sizemode = 'diameter' , opacity = 0.5),
