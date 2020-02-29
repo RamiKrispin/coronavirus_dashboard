@@ -204,14 +204,14 @@ coronavirus %>%
   dplyr::ungroup() %>%
   plotly::plot_ly(labels = ~ country, 
           values = ~ total_cases,
-          # type = "pie",
+          type = "pie",
           textposition = 'inside',
         textinfo = 'label+percent',
         insidetextfont = list(color = '#FFFFFF'),
         hoverinfo = 'text',
         text = ~ paste(country, "<br />",
                      "Number of confirmed cases: ", total_cases, sep = "")) %>%
-  plotly::add_pie(hole = 0.6) %>%
+  # plotly::add_pie(hole = 0.6) %>%
   plotly::layout(title = "",
                  margin =  list(
                    l = 10,
@@ -280,12 +280,52 @@ Column {data-width=600}
 ### Chart 3
 
 ```{r}
-
+coronavirus %>% 
+  dplyr::filter(date == max(date)) %>%
+  dplyr::group_by(Country.Region, type) %>%
+  dplyr::summarise(total = sum(cases)) %>%
+  tidyr::pivot_wider(names_from = type, values_from = total) %>%
+  dplyr::arrange(-confirmed) %>%
+  DT::datatable(rownames = FALSE,
+            colnames = c("Country", "Confirmed", "Recovered", "Death"),
+            options = list(pageLength = 10, dom = 'tip'))
+  
 ```   
  
-### Chart 4
+### Daily Distribution of New Cases in China by Province
     
 ```{r}
+province_vec <- coronavirus %>% 
+  dplyr::filter(type == "confirmed", Country.Region == "Mainland China") %>%
+  dplyr::group_by(Province.State) %>%
+  dplyr::summarise(total = sum(cases, na.rm = TRUE)) %>%
+  dplyr::arrange(-total) %>%
+  dplyr::select(province = Province.State) 
+
+
+coronavirus %>% 
+  dplyr::filter(type == "confirmed", Country.Region == "Mainland China") %>%
+  dplyr::group_by(date, Province.State) %>%
+  dplyr::summarise(total = sum(cases, na.rm = TRUE)) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(province = Province.State) %>%
+  dplyr::mutate(province = factor(province, levels = province_vec$province)) %>%
+  plotly::plot_ly(
+                  type = "scatter",
+                  x = ~ date, y = ~ total,
+                  color = ~ province,
+                  mode = "lines",
+                  fill = "tonexty",
+                  groupnorm = 'percent',
+                  stackgroup = 'one') %>%
+  plotly::layout(title = "",
+                 xaxis = list(title = "",
+                              showgrid = FALSE),
+                 yaxis = list(title = "",
+                              showgrid = FALSE,
+                              ticksuffix = '%',
+                              hoverformat = '.2f')) 
+
 
 ```
 
