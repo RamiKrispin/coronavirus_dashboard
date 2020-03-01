@@ -253,7 +253,7 @@ daily_confirmed %>%
                           y = 15133,
                           text = paste("One time adjustment -", 
                                        "<br>", 
-                                       "China modify the diagnostic criteria"),
+                                       "China modified the diagnostic criteria"),
                           xref = "x",
                           yref = "y",
                           arrowhead = 7,
@@ -264,7 +264,7 @@ daily_confirmed %>%
                           ay = -40) %>%
   plotly::add_annotations(x = as.Date("2020-02-26"),
                           y = 577,
-                          text = paste("More new cases", "<br>", "outside of China"),
+                          text = paste("New cases outside of China", "<br>", "surpass the ones inside China"),
                           xref = "x",
                           yref = "y",
                           arrowhead = 7,
