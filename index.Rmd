@@ -54,13 +54,13 @@ Row
 
 ```{r}
 
-valueBox(value = paste(sum(df$confirmed)), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
+valueBox(value = paste(sum(df$confirmed), "Cases", sep = " "), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
 ```
 
 ### recovered {.value-box}
 
 ```{r}
-valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " cases (",
+valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " Cases (",
                        round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
          caption = "Recovered Cases", icon = "fas fa-heartbeat", 
@@ -71,7 +71,7 @@ valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " cases (",
 
 ```{r}
 
-valueBox(value = paste(sum(df$death, na.rm = TRUE), " cases (",
+valueBox(value = paste(sum(df$death, na.rm = TRUE), " Cases (",
                        round(100 * sum(df$death, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""),
          caption = "Death Cases", 
@@ -191,7 +191,7 @@ Trends
 Column {data-width=400}
 -------------------------------------
     
-### Distribution of New Cases 
+### New Cases - Top 15 Countries (`r  max(coronavirus$date)`)
     
 ```{r}
 max_date <- max(coronavirus$date)
@@ -202,31 +202,22 @@ coronavirus %>%
   dplyr::arrange(-total_cases) %>%
   dplyr::mutate(country = factor(Country.Region, levels = Country.Region)) %>%
   dplyr::ungroup() %>%
-  plotly::plot_ly(labels = ~ country, 
-          values = ~ total_cases,
-          type = "pie",
-          textposition = 'inside',
-        textinfo = 'label+percent',
-        insidetextfont = list(color = '#FFFFFF'),
-        hoverinfo = 'text',
-        text = ~ paste(country, "<br />",
-                     "Number of confirmed cases: ", total_cases, sep = "")) %>%
-  # plotly::add_pie(hole = 0.6) %>%
-  plotly::layout(title = "",
+  dplyr::top_n(n = 15, wt = total_cases) %>%
+  plotly::plot_ly(x = ~ country,
+                  y = ~ total_cases,
+                  text = ~ total_cases,
+                  textposition = 'auto',
+                  type = "bar") %>%
+  plotly::layout(yaxis = list(title = "Number of Cases"),
+                 xaxis = list(title = ""),
                  margin =  list(
                    l = 10,
                    r = 10,
                    b = 10,
                    t = 10,
                    pad = 2
-                 )) %>%
-  plotly::add_annotations(text = paste("During", max_date, sep = " "),
-                          xref = "paper",
-                          yref = "paper",
-                          showarrow = FALSE,
-                          x = 0,
-                          y = 1) %>%
-  plotly::hide_legend()
+                 ))
+
 ```
 
 
@@ -339,7 +330,7 @@ coronavirus::coronavirus %>%
   
 ```   
  
-### New Cases
+### Cases Status Update for `r  max(coronavirus$date)`
     
 ```{r}
 coronavirus %>% 
@@ -348,10 +339,9 @@ coronavirus %>%
   dplyr::summarise(total = sum(cases)) %>%
   tidyr::pivot_wider(names_from = type, values_from = total) %>%
   dplyr::arrange(-confirmed) %>%
-  DT::datatable(caption =paste("During", max_date, sep = " "),
-    rownames = FALSE,
-            colnames = c("Country", "Confirmed", "Recovered", "Death"),
-            options = list(pageLength = 10, dom = 'tip'))
+  DT::datatable(rownames = FALSE,
+                colnames = c("Country", "Confirmed", "Recovered", "Death"),
+                options = list(pageLength = 10, dom = 'tip'))
 ```
 
 Data
