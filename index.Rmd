@@ -371,6 +371,7 @@ This application provides an overview of the 2019 Novel Coronavirus COVID-19 (20
 * Data - the [coronavirus](https://github.com/RamiKrispin/coronavirus) R package dev version (v0.1.0.9000). The raw data pulled from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus [repository](https://github.com/RamiKrispin/coronavirus-csv).
 * Visualization - the [plotly](https://plot.ly/r/) package
 * Data manipulation - [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/)
+* Tables - the [DT](https://rstudio.github.io/DT/) package
 
 **Deployment and reproducibly**
 
