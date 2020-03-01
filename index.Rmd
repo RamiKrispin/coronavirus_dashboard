@@ -326,7 +326,8 @@ coronavirus::coronavirus %>%
   plotly::layout(yaxis = list(title = "Recovery Rate", ticksuffix = "%"),
                 xaxis = list(title = "Death Rate", ticksuffix = "%", 
                              dtick = 1, 
-                             tick0 = 0))
+                             tick0 = 0),
+                hovermode = "compare")
   
 ```   
  
