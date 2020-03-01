@@ -370,3 +370,25 @@ coronavirus %>%
 About
 =======================================================================
 
+**The Coronavirus Dashboard**
+
+This application provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the Rmakrdown framework and can easily reproduce by others.
+
+**Packages**
+
+* Dashboard interface - the [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) package. 
+* Data - the [coronavirus](https://github.com/RamiKrispin/coronavirus) R package dev version (v0.1.0.9000). The raw data pulled from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus [repository](https://github.com/RamiKrispin/coronavirus-csv).
+* Visualization - the [plotly](https://plot.ly/r/) package
+* Data manipulation - [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/)
+
+**Deployment and reproducibly**
+
+The dashboard was deployed to Github docs. If you wish to deploy and/or modify the dashboard on your Github account, you can apply the following steps:
+
+* Fork the dashboard [repository](https://github.com/RamiKrispin/coronavirus_dashboard), or
+* Clone it and push it to your Github package
+* Here some general guidance about deployment of flexdashboard on Github page - [link](https://github.com/pbatey/flexdashboard-example)
+
+For any question or feedback, you can either open an [issue](https://github.com/RamiKrispin/coronavirus_dashboard/issues) or contact me on [Twitter](https://twitter.com/Rami_Krispin).
+
+
