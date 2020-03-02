@@ -35,7 +35,7 @@ df <- coronavirus %>%
   dplyr::mutate(country = trimws(country)) %>%
   dplyr::mutate(country = factor(country, levels = country))
 
-df_daily <- coronavirus::coronavirus %>% 
+df_daily <- coronavirus %>% 
   dplyr::group_by(date, type) %>%
   dplyr::summarise(total = sum(cases, na.rm = TRUE)) %>%
   tidyr::pivot_wider(names_from = type,
@@ -187,17 +187,17 @@ plotly::plot_ly(data = df_daily) %>%
                     marker = list(color = "red")) %>%
    plotly::add_annotations(x = as.Date("2020-03-01"),
                           y = 42716,
-                          text = paste("Number of recovered cases surpass", 
+                          text = paste("# of recovered cases surpass", 
                                        "<br>", 
-                                       "the number of active cases"),
+                                       "the # of active cases"),
                           xref = "x",
                           yref = "y",
-                          arrowhead = 7,
-                          arrowhead = 2,
+                          arrowhead = 5,
+                          arrowhead = 3,
                           arrowsize = 1,
                           showarrow = TRUE,
-                          ax = -40,
-                          ay = -60) %>%
+                          ax = -270,
+                          ay = 30) %>%
   plotly::layout(title = "",
                  yaxis = list(title = "Cumulative Number of Cases"),
                  xaxis = list(title = "Date"),
@@ -302,8 +302,8 @@ daily_confirmed %>%
                                        "China modified the diagnostic criteria"),
                           xref = "x",
                           yref = "y",
-                          arrowhead = 7,
-                          arrowhead = 2,
+                          arrowhead = 5,
+                          arrowhead = 3,
                           arrowsize = 1,
                           showarrow = TRUE,
                           ax = 50,
@@ -313,8 +313,8 @@ daily_confirmed %>%
                           text = paste("New cases outside of China", "<br>", "surpass the ones inside China"),
                           xref = "x",
                           yref = "y",
-                          arrowhead = 7,
-                          arrowhead = 2,
+                          arrowhead = 5,
+                          arrowhead = 3,
                           arrowsize = 1,
                           showarrow = TRUE,
                           ax = -70,
