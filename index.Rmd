@@ -62,14 +62,14 @@ Row
 
 ```{r}
 
-valueBox(value = paste(sum(df$confirmed), "", sep = " "), caption = "Total Confirmed Cases", icon = "fas fa-user-md", color = "purple")
+valueBox(value = paste(format(sum(df$confirmed), big.mark = ","), "", sep = " "), caption = "Total Confirmed Cases", icon = "fas fa-user-md", color = "purple")
 ```
 
 
 ### active {.value-box}
 
 ```{r}
-valueBox(value = paste(sum(df$unrecovered, na.rm = TRUE), " (",
+valueBox(value = paste(format(sum(df$unrecovered, na.rm = TRUE), big.mark = ","), " (",
                        round(100 * sum(df$unrecovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
          caption = "Active Cases", icon = "fas fa-ambulance", 
@@ -79,7 +79,7 @@ valueBox(value = paste(sum(df$unrecovered, na.rm = TRUE), " (",
 ### recovered {.value-box}
 
 ```{r}
-valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " (",
+valueBox(value = paste(format(sum(df$recovered, na.rm = TRUE), big.mark = ","), " (",
                        round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
          caption = "Recovered Cases", icon = "fas fa-heartbeat", 
@@ -90,7 +90,7 @@ valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " (",
 
 ```{r}
 
-valueBox(value = paste(sum(df$death, na.rm = TRUE), " (",
+valueBox(value = paste(format(sum(df$death, na.rm = TRUE), big.mark = ","), " (",
                        round(100 * sum(df$death, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""),
          caption = "Death Cases", 
@@ -358,8 +358,8 @@ coronavirus::coronavirus %>%
   dplyr::mutate(confirmed_normal = as.numeric(confirmed) / max(as.numeric(confirmed))) %>%
   plotly::plot_ly(y = ~ round(100 * recover_rate, 1),
                   x = ~ round(100 * death_rate, 1),
-                  size = ~ 100 * confirmed,
-                  sizes = c(20, 50),
+                  size = ~  log(confirmed),
+                  sizes = c(5, 50),
                   type = 'scatter', mode = 'markers',
                   color = ~ Country.Region,
                   marker = list(sizemode = 'diameter' , opacity = 0.5),
