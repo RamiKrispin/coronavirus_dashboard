@@ -22,6 +22,7 @@ df <- coronavirus %>%
   dplyr::summarise(total = sum(cases)) %>%
   tidyr::pivot_wider(names_from =  type, 
                      values_from = total) %>%
+  dplyr::mutate(unrecovered = confirmed - ifelse(is.na(recovered), 0, recovered) - ifelse(is.na(death), 0, death)) %>%
   dplyr::arrange(-confirmed) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(country = dplyr::if_else(Country.Region == "United Arab Emirates", "UAE", Country.Region)) %>%
@@ -54,13 +55,24 @@ Row
 
 ```{r}
 
-valueBox(value = paste(sum(df$confirmed), "Cases", sep = " "), caption = "Confirmed Cases", icon = "fas fa-ambulance", color = "#1f77b4")
+valueBox(value = paste(sum(df$confirmed), "", sep = " "), caption = "Total Confirmed Cases", icon = "fas fa-user-md", color = "purple")
+```
+
+
+### active {.value-box}
+
+```{r}
+valueBox(value = paste(sum(df$unrecovered, na.rm = TRUE), " (",
+                       round(100 * sum(df$unrecovered, na.rm = TRUE) / sum(df$confirmed), 1), 
+                       "%)", sep = ""), 
+         caption = "Active Cases", icon = "fas fa-ambulance", 
+         color = "#1f77b4")
 ```
 
 ### recovered {.value-box}
 
 ```{r}
-valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " Cases (",
+valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " (",
                        round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
          caption = "Recovered Cases", icon = "fas fa-heartbeat", 
@@ -71,7 +83,7 @@ valueBox(value = paste(sum(df$recovered, na.rm = TRUE), " Cases (",
 
 ```{r}
 
-valueBox(value = paste(sum(df$death, na.rm = TRUE), " Cases (",
+valueBox(value = paste(sum(df$death, na.rm = TRUE), " (",
                        round(100 * sum(df$death, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""),
          caption = "Death Cases", 
@@ -90,11 +102,11 @@ Row
 
 plotly::plot_ly(data = df, 
                 x = ~ country, 
-                y = ~ confirmed, 
+                y = ~ unrecovered, 
                 # text =  ~ confirmed, 
                 # textposition = 'auto',
                 type = "bar", 
-                name = "Confirmed") %>%
+                name = "Active") %>%
   plotly::add_trace(y = ~ recovered, 
                     # text =  ~ recovered, 
                     # textposition = 'auto',
@@ -363,7 +375,7 @@ About
 
 **The Coronavirus Dashboard**
 
-This application provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the Rmakrdown framework and can easily reproduce by others.
+This Coronavirus dashboard provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the Rmakrdown framework and can easily reproduce by others.
 
 **Packages**
 
