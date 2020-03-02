@@ -17,8 +17,11 @@ data(coronavirus)
 `%>%` <- magrittr::`%>%`
 #------------------ Parameters ------------------
 # Set colors
-
-
+# https://www.w3.org/TR/css-color-3/#svg-color
+confirmed_color <- "purple"
+active_color <- "#1f77b4"
+recovered_color <- "forestgreen"
+death_color <- "red"
 #------------------ Data ------------------
 df <- coronavirus %>% 
   # dplyr::filter(date == max(date)) %>%
@@ -62,7 +65,10 @@ Row
 
 ```{r}
 
-valueBox(value = paste(format(sum(df$confirmed), big.mark = ","), "", sep = " "), caption = "Total Confirmed Cases", icon = "fas fa-user-md", color = "purple")
+valueBox(value = paste(format(sum(df$confirmed), big.mark = ","), "", sep = " "), 
+         caption = "Total Confirmed Cases", 
+         icon = "fas fa-user-md", 
+         color = confirmed_color)
 ```
 
 
@@ -73,7 +79,7 @@ valueBox(value = paste(format(sum(df$unrecovered, na.rm = TRUE), big.mark = ",")
                        round(100 * sum(df$unrecovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
          caption = "Active Cases", icon = "fas fa-ambulance", 
-         color = "#1f77b4")
+         color = active_color)
 ```
 
 ### recovered {.value-box}
@@ -83,7 +89,7 @@ valueBox(value = paste(format(sum(df$recovered, na.rm = TRUE), big.mark = ","), 
                        round(100 * sum(df$recovered, na.rm = TRUE) / sum(df$confirmed), 1), 
                        "%)", sep = ""), 
          caption = "Recovered Cases", icon = "fas fa-heartbeat", 
-         color = "green")
+         color = recovered_color)
 ```
 
 ### death {.value-box}
@@ -95,7 +101,7 @@ valueBox(value = paste(format(sum(df$death, na.rm = TRUE), big.mark = ","), " ("
                        "%)", sep = ""),
          caption = "Death Cases", 
          icon = "fas fa-heart-broken", 
-         color = "red")
+         color = death_color)
 ```
 
 
@@ -113,17 +119,18 @@ plotly::plot_ly(data = df,
                 # text =  ~ confirmed, 
                 # textposition = 'auto',
                 type = "bar", 
-                name = "Active") %>%
+                name = "Active",
+                marker = list(color = active_color)) %>%
   plotly::add_trace(y = ~ recovered, 
                     # text =  ~ recovered, 
                     # textposition = 'auto',
                     name = "Recovered",
-                    marker = list(color = "green")) %>%
+                    marker = list(color = recovered_color)) %>%
   plotly::add_trace(y = ~ death, 
                     # text =  ~ death, 
                     # textposition = 'auto',
                     name = "Death",
-                    marker = list(color = "red")) %>%
+                    marker = list(color = death_color)) %>%
   plotly::layout(barmode = 'stack',
                  yaxis = list(title = "Total Cases (log scaled)",
                               type = "log"),
@@ -170,21 +177,22 @@ plotly::plot_ly(data = df_daily) %>%
                     type = "scatter",
                     mode = "lines+markers",
                     name = "Active",
-                    line = list(color = "#1f77b4")) %>%
+                    line = list(color = active_color),
+                    marker = list(color = active_color)) %>%
   plotly::add_trace(x = ~ date,
                     y = ~ recovered_cum,
                     type = "scatter",
                     mode = "lines+markers",
                     name = "Recovered",
-                    line = list(color = "green"),
-                    marker = list(color = "green")) %>%
+                    line = list(color = recovered_color),
+                    marker = list(color = recovered_color)) %>%
   plotly::add_trace(x = ~ date,
                     y = ~ death_cum,
                     type = "scatter",
                     mode = 'lines+markers',
                     name = "Death",
-                    line = list(color = "red"),
-                    marker = list(color = "red")) %>%
+                    line = list(color = death_color),
+                    marker = list(color = death_color)) %>%
    plotly::add_annotations(x = as.Date("2020-03-01"),
                           y = 42716,
                           text = paste("# of recovered cases surpass", 
