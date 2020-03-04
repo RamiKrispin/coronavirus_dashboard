@@ -204,8 +204,8 @@ plotly::plot_ly(data = df_daily) %>%
                           arrowhead = 3,
                           arrowsize = 1,
                           showarrow = TRUE,
-                          ax = -270,
-                          ay = 30) %>%
+                          ax = -10,
+                          ay = 90) %>%
   plotly::layout(title = "",
                  yaxis = list(title = "Cumulative Number of Cases"),
                  xaxis = list(title = "Date"),
