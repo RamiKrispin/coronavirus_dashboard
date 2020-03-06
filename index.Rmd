@@ -108,12 +108,12 @@ valueBox(value = paste(format(sum(df$death, na.rm = TRUE), big.mark = ","), " ("
 Row
 -----------------------------------------------------------------------
 
-### Cases Distribution by Type (Top 25 countries)
+### Cases Distribution by Type (Top 25 Countries)
 
 ```{r daily_summary}
 
 
-plotly::plot_ly(data = df[1:25,], 
+plotly::plot_ly(data = df[1:30,], 
                 x = ~ country, 
                 y = ~ unrecovered, 
                 # text =  ~ confirmed, 
