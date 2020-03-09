@@ -394,6 +394,7 @@ coronavirus %>%
   dplyr::summarise(total = sum(cases)) %>%
   tidyr::pivot_wider(names_from = type, values_from = total) %>%
   dplyr::arrange(-confirmed) %>%
+  dplyr::select(country = Country.Region, confirmed, recovered, death) %>%
   DT::datatable(rownames = FALSE,
                 colnames = c("Country", "Confirmed", "Recovered", "Death"),
                 options = list(pageLength = 10, dom = 'tip'))
