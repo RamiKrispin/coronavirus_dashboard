@@ -388,16 +388,19 @@ coronavirus::coronavirus %>%
 ### Cases Status Update for `r  max(coronavirus$date)`
     
 ```{r}
-coronavirus %>% 
+daily_summary <- coronavirus %>% 
   dplyr::filter(date == max(date)) %>%
   dplyr::group_by(Country.Region, type) %>%
   dplyr::summarise(total = sum(cases)) %>%
   tidyr::pivot_wider(names_from = type, values_from = total) %>%
   dplyr::arrange(-confirmed) %>%
-  dplyr::select(country = Country.Region, confirmed, recovered, death) %>%
-  DT::datatable(rownames = FALSE,
+  dplyr::select(country = Country.Region, confirmed, recovered, death)
+  
+  
+  DT::datatable(data = daily_summary,
+                rownames = FALSE,
                 colnames = c("Country", "Confirmed", "Recovered", "Death"),
-                options = list(pageLength = 10, dom = 'tip'))
+                options = list(pageLength = nrow(daily_summary), dom = 'tip'))
 ```
 
 Data
