@@ -403,6 +403,59 @@ daily_summary <- coronavirus %>%
                 options = list(pageLength = nrow(daily_summary), dom = 'tip'))
 ```
 
+
+Map
+=======================================================================
+
+**Map**
+
+```{r}
+# map tab added by Art Steinmetz
+library(leaflet)
+library(leafpop)
+library(dplyr)
+library(purrr)
+
+cv_data_for_plot <- coronavirus %>% 
+  filter(cases > 0) %>% 
+  group_by(Country.Region,Province.State,Lat,Long,type) %>% 
+  summarise(cases = sum(cases)) %>% 
+  mutate(log_cases = 2 * log(cases)) %>% 
+  ungroup()
+
+cv_data_for_plot.split <- cv_data_for_plot %>% split(cv_data_for_plot$type)
+pal <- colorFactor(c("orange", "red","green"), domain = c("confirmed", "death","recovered"))
+
+map_object <- leaflet() %>% addProviderTiles(providers$Stamen.Toner)
+names(cv_data_for_plot.split) %>%
+  purrr::walk( function(df) {
+    map_object <<- map_object %>%
+      addCircleMarkers(data=cv_data_for_plot.split[[df]],
+                 lng=~Long, lat=~Lat,
+#                 label=~as.character(cases),
+                 color = ~pal(type),
+                 stroke = FALSE,
+                 fillOpacity = 0.8,
+                 radius = ~log_cases,
+                 popup =  leafpop::popupTable(cv_data_for_plot.split[[df]],
+                                              feature.id = FALSE,
+                                              row.numbers = FALSE,
+                                              zcol=c("type","cases","Country.Region","Province.State")),
+                 group = df,
+#                 clusterOptions = markerClusterOptions(removeOutsideVisibleBounds = F),
+                 labelOptions = labelOptions(noHide = F,
+                                             direction = 'auto'))
+  })
+
+
+map_object %>%
+  addLayersControl(
+    overlayGroups = names(cv_data_for_plot.split),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+
 Data
 =======================================================================
 
