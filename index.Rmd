@@ -280,7 +280,7 @@ coronavirus %>%
 ```{r}
 daily_confirmed <- coronavirus %>%
   dplyr::filter(type == "confirmed") %>%
-  dplyr::mutate(country = dplyr::if_else(Country.Region == "Mainland China", 
+  dplyr::mutate(country = dplyr::if_else(Country.Region == "China", 
                                          "China", 
                                          "Rest of the World")) %>%
   dplyr::group_by(date, country) %>%
