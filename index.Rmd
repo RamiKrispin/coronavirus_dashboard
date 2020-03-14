@@ -479,7 +479,7 @@ The input data for this dashboard is the [coronavirus](https://github.com/RamiKr
 **Packages**
 
 * Dashboard interface - the [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) package. 
-* Visualization - the [plotly](https://plot.ly/r/) package
+* Visualization - the [plotly](https://plot.ly/r/) package for the plots and [leaflet](https://rstudio.github.io/leaflet/) for the map
 * Data manipulation - [dplyr](https://dplyr.tidyverse.org/), and [tidyr](https://tidyr.tidyverse.org/)
 * Tables - the [DT](https://rstudio.github.io/DT/) package
 
@@ -492,5 +492,9 @@ The dashboard was deployed to Github docs. If you wish to deploy and/or modify t
 * Here some general guidance about deployment of flexdashboard on Github page - [link](https://github.com/pbatey/flexdashboard-example)
 
 For any question or feedback, you can either open an [issue](https://github.com/RamiKrispin/coronavirus_dashboard/issues) or contact me on [Twitter](https://twitter.com/Rami_Krispin).
+
+**Contribution** 
+
+The **Map** tab was contributed by [Art Steinmetz](@adababbage) on this [pull request](https://github.com/RamiKrispin/coronavirus_dashboard/pull/1). Thanks Art!
 
 
