@@ -247,14 +247,13 @@ Map
 # map tab added by Art Steinmetz
 library(leaflet)
 library(leafpop)
-library(dplyr)
 library(purrr)
 cv_data_for_plot <- coronavirus %>% 
-  filter(cases > 0) %>% 
-  group_by(Country.Region,Province.State,Lat,Long,type) %>% 
-  summarise(cases = sum(cases)) %>% 
-  mutate(log_cases = 2 * log(cases)) %>% 
-  ungroup()
+  dplyr::filter(cases > 0) %>% 
+  dplyr::group_by(Country.Region,Province.State,Lat,Long,type) %>% 
+  dplyr::summarise(cases = sum(cases)) %>% 
+  dplyr::mutate(log_cases = 2 * log(cases)) %>% 
+  dplyr::ungroup()
 cv_data_for_plot.split <- cv_data_for_plot %>% split(cv_data_for_plot$type)
 pal <- colorFactor(c("orange", "red","green"), domain = c("confirmed", "death","recovered"))
 map_object <- leaflet() %>% addProviderTiles(providers$Stamen.Toner)
@@ -280,7 +279,7 @@ names(cv_data_for_plot.split) %>%
 map_object %>%
   addLayersControl(
     overlayGroups = names(cv_data_for_plot.split),
-    options = layersControlOptions(collapsed = FALSE)
+    options = layersControlOptions(collapsed = FALSE) 
   )
 ```
 
@@ -394,7 +393,7 @@ daily_confirmed %>%
 Column {data-width=600}
 -------------------------------------
    
-### Recovery and Death Rates for Countries with at Least 25 Cases
+### Recovery and Death Rates for Countries with at Least 100 Cases
 
 ```{r}
 coronavirus::coronavirus %>% 
@@ -403,7 +402,7 @@ coronavirus::coronavirus %>%
   dplyr::summarise(total_cases = sum(cases)) %>%
   tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
   dplyr::arrange(- confirmed) %>%
-  dplyr::filter(confirmed >= 25) %>%
+  dplyr::filter(confirmed >= 100) %>%
   dplyr::mutate(recover_rate = recovered / confirmed,
                 death_rate = death / confirmed) %>% 
   dplyr::mutate(recover_rate = dplyr::if_else(is.na(recover_rate), 0, recover_rate),
