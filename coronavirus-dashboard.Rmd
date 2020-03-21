@@ -1,5 +1,5 @@
 ---
-title: "Coronavirus: the case of Belgium"
+title: "Coronavirus in Belgium"
 author: "Antoine Soetewey"
 output: 
   flexdashboard::flex_dashboard:
