@@ -11,6 +11,10 @@ output:
 ```{r setup, include=FALSE}
 #------------------ Packages ------------------
 library(flexdashboard)
+
+#checks if there is data update on the Github version
+coronavirus::update_datasets(silence = TRUE)
+
 library(coronavirus)
 data(coronavirus)
 
