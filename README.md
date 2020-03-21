@@ -34,3 +34,9 @@ dashboard can be found in this
 **Update**
 
 The dashboard has been updated on Saturday March 21, 2020.
+
+<br>
+
+*Go back to [www.statsandr.com](https://www.statsandr.com/) (blog) or
+[www.antoinesoetewey.com](https://www.antoinesoetewey.com/) (personal
+website)*
