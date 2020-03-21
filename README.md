@@ -39,4 +39,4 @@ The dashboard has been updated on Saturday March 21, 2020.
 
 *Go back to [www.statsandr.com](https://www.statsandr.com/) (blog) or
 [www.antoinesoetewey.com](https://www.antoinesoetewey.com/) (personal
-website)*
+website)*.

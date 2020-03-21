@@ -33,4 +33,4 @@ The dashboard has been updated on `r format(Sys.time(), "%A %B %d, %Y")`.
 
 <br>
 
-*Go back to [www.statsandr.com](https://www.statsandr.com/) (blog) or [www.antoinesoetewey.com](https://www.antoinesoetewey.com/) (personal website)*
+*Go back to [www.statsandr.com](https://www.statsandr.com/) (blog) or [www.antoinesoetewey.com](https://www.antoinesoetewey.com/) (personal website)*.
