@@ -118,7 +118,7 @@ valueBox(
 Row
 -----------------------------------------------------------------------
 
-### Daily **cumulative** cases by type, in **Belgium** only
+### **Daily cumulative cases by type** (Belgium only)
     
 ```{r}
 plotly::plot_ly(data = df_daily) %>%
@@ -200,7 +200,7 @@ Column {data-width=400}
 -------------------------------------
 
 
-### Daily **new** cases
+### **Daily new cases**
     
 ```{r}
 daily_confirmed <- coronavirus %>%
@@ -264,7 +264,7 @@ daily_confirmed %>%
   )
 ```
  
-### Cases distribution by type
+### **Cases distribution by type**
 
 ```{r daily_summary}
 df_EU <- coronavirus %>%
@@ -324,7 +324,7 @@ plotly::plot_ly(
 Map
 =======================================================================
 
-### World map of cases (*use + and - icons to zoom in/out*)
+### **World map of cases** (*use + and - icons to zoom in/out*)
 
 ```{r}
 # map tab added by Art Steinmetz
