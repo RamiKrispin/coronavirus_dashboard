@@ -12,6 +12,8 @@ output:
 ```{r setup, include=FALSE}
 #------------------ Packages ------------------
 library(flexdashboard)
+# install.packages("devtools")
+# devtools::install_github("RamiKrispin/coronavirus")
 library(coronavirus)
 data(coronavirus)
 # View(coronavirus)
@@ -93,7 +95,7 @@ valueBox(
     "%)",
     sep = ""
   ),
-  caption = "Active cases (% of total)", icon = "fas fa-ambulance",
+  caption = "Active cases (% of total cases)", icon = "fas fa-ambulance",
   color = active_color
 )
 ```
@@ -390,7 +392,14 @@ The code behind this dashboard is available on [GitHub](https://github.com/Antoi
 
 **Data**
 
-The input data for this dashboard is from the [`{coronavirus}`](https://github.com/RamiKrispin/coronavirus){target="_blank"} R package. The data and dashboard are refreshed on a daily basis. The raw data is pulled from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus [repository](https://github.com/RamiKrispin/coronavirus-csv){target="_blank"}.
+The input data for this dashboard is the dataset available from the [`{coronavirus}`](https://github.com/RamiKrispin/coronavirus){target="_blank"} R package. Make sure to download the development version of the package to have the latest data:
+
+`install.packages("devtools")
+devtools::install_github("RamiKrispin/coronavirus")`
+
+The data and dashboard are refreshed on a daily basis.
+
+The raw data is pulled from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus [repository](https://github.com/RamiKrispin/coronavirus-csv){target="_blank"}.
 
 **Contact**
 
