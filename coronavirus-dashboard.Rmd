@@ -394,8 +394,10 @@ The code behind this dashboard is available on [GitHub](https://github.com/Antoi
 
 The input data for this dashboard is the dataset available from the [`{coronavirus}`](https://github.com/RamiKrispin/coronavirus){target="_blank"} R package. Make sure to download the development version of the package to have the latest data:
 
-`install.packages("devtools")
-devtools::install_github("RamiKrispin/coronavirus")`
+```
+install.packages("devtools")
+devtools::install_github("RamiKrispin/coronavirus")
+```
 
 The data and dashboard are refreshed on a daily basis.
 
