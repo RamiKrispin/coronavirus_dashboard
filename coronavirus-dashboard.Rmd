@@ -405,7 +405,7 @@ The raw data is pulled from the Johns Hopkins University Center for Systems Scie
 
 **Contact**
 
-For any question or feedback, you can [contact me](https://www.statsandr.com/contact/). More information about this dashboard can be found in this [article](https://www.statsandr.com/blog/).
+For any question or feedback, you can [contact me](https://www.statsandr.com/contact/). More information about this dashboard can be found in this [article](https://www.statsandr.com/blog/how-to-create-a-simple-coronavirus-dashboard-specific-to-your-country-in-r/).
 
 **Update**
 
