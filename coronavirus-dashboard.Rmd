@@ -16,6 +16,7 @@ library(flexdashboard)
 # devtools::install_github("RamiKrispin/coronavirus")
 library(coronavirus)
 data(coronavirus)
+# update_datasets()
 # View(coronavirus)
 
 `%>%` <- magrittr::`%>%`
