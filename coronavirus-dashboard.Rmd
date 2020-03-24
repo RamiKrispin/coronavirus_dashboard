@@ -18,6 +18,7 @@ library(coronavirus)
 data(coronavirus)
 # update_datasets()
 # View(coronavirus)
+# max(coronavirus$date)
 
 `%>%` <- magrittr::`%>%`
 #------------------ Parameters ------------------
