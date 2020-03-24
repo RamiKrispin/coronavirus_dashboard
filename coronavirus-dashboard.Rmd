@@ -38,7 +38,8 @@ df <- coronavirus %>%
     names_from = type,
     values_from = total
   ) %>%
-  dplyr::mutate(unrecovered = confirmed - ifelse(is.na(recovered), 0, recovered) - ifelse(is.na(death), 0, death)) %>%
+  # dplyr::mutate(unrecovered = confirmed - ifelse(is.na(recovered), 0, recovered) - ifelse(is.na(death), 0, death)) %>%
+  dplyr::mutate(unrecovered = confirmed - ifelse(is.na(death), 0, death)) %>%
   dplyr::arrange(-confirmed) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(country = dplyr::if_else(Country.Region == "United Arab Emirates", "UAE", Country.Region)) %>%
@@ -57,11 +58,12 @@ df_daily <- coronavirus %>%
   ) %>%
   dplyr::arrange(date) %>%
   dplyr::ungroup() %>%
-  dplyr::mutate(active = confirmed - death - recovered) %>%
+  #dplyr::mutate(active = confirmed - death - recovered) %>%
+  dplyr::mutate(active = confirmed - death) %>%
   dplyr::mutate(
     confirmed_cum = cumsum(confirmed),
     death_cum = cumsum(death),
-    recovered_cum = cumsum(recovered),
+    # recovered_cum = cumsum(recovered),
     active_cum = cumsum(active)
   )
 
@@ -88,19 +90,19 @@ valueBox(
 ```
 
 
-### active {.value-box}
+<!-- ### active {.value-box} -->
 
-```{r}
-valueBox(
-  value = paste(format(sum(df$unrecovered, na.rm = TRUE), big.mark = ","), " (",
-    round(100 * sum(df$unrecovered, na.rm = TRUE) / sum(df$confirmed), 1),
-    "%)",
-    sep = ""
-  ),
-  caption = "Active cases (% of total cases)", icon = "fas fa-ambulance",
-  color = active_color
-)
-```
+<!-- ```{r} -->
+<!-- valueBox( -->
+<!--   value = paste(format(sum(df$unrecovered, na.rm = TRUE), big.mark = ","), " (", -->
+<!--     round(100 * sum(df$unrecovered, na.rm = TRUE) / sum(df$confirmed), 1), -->
+<!--     "%)", -->
+<!--     sep = "" -->
+<!--   ), -->
+<!--   caption = "Active cases (% of total cases)", icon = "fas fa-ambulance", -->
+<!--   color = active_color -->
+<!-- ) -->
+<!-- ``` -->
 
 ### death {.value-box}
 
@@ -128,10 +130,12 @@ Row
 plotly::plot_ly(data = df_daily) %>%
   plotly::add_trace(
     x = ~date,
-    y = ~active_cum,
+    # y = ~active_cum,
+    y = ~confirmed_cum,
     type = "scatter",
     mode = "lines+markers",
-    name = "Active",
+    # name = "Active",
+    name = "Confirmed",
     line = list(color = active_color),
     marker = list(color = active_color)
   ) %>%
@@ -283,7 +287,8 @@ df_EU <- coronavirus %>%
     names_from = type,
     values_from = total
   ) %>%
-  dplyr::mutate(unrecovered = confirmed - ifelse(is.na(recovered), 0, recovered) - ifelse(is.na(death), 0, death)) %>%
+  # dplyr::mutate(unrecovered = confirmed - ifelse(is.na(recovered), 0, recovered) - ifelse(is.na(death), 0, death)) %>%
+  dplyr::mutate(unrecovered = confirmed - ifelse(is.na(death), 0, death)) %>%
   dplyr::arrange(confirmed) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(country = dplyr::if_else(Country.Region == "United Arab Emirates", "UAE", Country.Region)) %>%
@@ -295,11 +300,12 @@ df_EU <- coronavirus %>%
 plotly::plot_ly(
   data = df_EU,
   x = ~country,
-  y = ~unrecovered,
+  # y = ~unrecovered,
+  y = ~ confirmed,
   # text =  ~ confirmed,
   # textposition = 'auto',
   type = "bar",
-  name = "Active",
+  name = "Confirmed",
   marker = list(color = active_color)
 ) %>%
   plotly::add_trace(
