@@ -13,7 +13,7 @@ output:
 #------------------ Packages ------------------
 library(flexdashboard)
 # install.packages("devtools")
-# devtools::install_github("RamiKrispin/coronavirus")
+# devtools::install_github("RamiKrispin/coronavirus", force = TRUE)
 library(coronavirus)
 data(coronavirus)
 # update_datasets()
