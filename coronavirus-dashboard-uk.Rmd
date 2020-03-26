@@ -149,8 +149,8 @@ plotly::plot_ly(data = df_daily) %>%
     marker = list(color = death_color)
   ) %>%
   plotly::add_annotations(
-    x = as.Date("2020-02-04"),
-    y = 1,
+    x = as.Date("2020-01-31"),
+    y = 2,
     text = paste("First case"),
     xref = "x",
     yref = "y",
@@ -162,26 +162,9 @@ plotly::plot_ly(data = df_daily) %>%
     ay = -90
   ) %>%
   plotly::add_annotations(
-    x = as.Date("2020-03-11"),
+    x = as.Date("2020-03-05"),
     y = 3,
     text = paste("First death"),
-    xref = "x",
-    yref = "y",
-    arrowhead = 5,
-    arrowhead = 3,
-    arrowsize = 1,
-    showarrow = TRUE,
-    ax = -90,
-    ay = -90
-  ) %>%
-  plotly::add_annotations(
-    x = as.Date("2020-03-18"),
-    y = 14,
-    text = paste(
-      "New containment",
-      "<br>",
-      "measures"
-    ),
     xref = "x",
     yref = "y",
     arrowhead = 5,
