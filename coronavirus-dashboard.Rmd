@@ -208,7 +208,7 @@ Column {data-width=400}
 -------------------------------------
 
 
-### **Daily new cases**
+### **Daily new confirmed cases**
     
 ```{r}
 daily_confirmed <- coronavirus %>%
@@ -256,7 +256,7 @@ daily_confirmed %>%
   plotly::layout(
     title = "",
     legend = list(x = 0.1, y = 0.9),
-    yaxis = list(title = "Number of new cases"),
+    yaxis = list(title = "Number of new confirmed cases"),
     xaxis = list(title = "Date"),
     # paper_bgcolor = "black",
     # plot_bgcolor = "black",
