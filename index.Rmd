@@ -397,7 +397,7 @@ daily_confirmed %>%
 Column {data-width=600}
 -------------------------------------
    
-### Recovery and Death Rates for Countries with at Least 100 Cases
+### Recovery and Death Rates for Countries with at Least 2000 Cases
 
 ```{r}
 coronavirus::coronavirus %>% 
@@ -406,7 +406,7 @@ coronavirus::coronavirus %>%
   dplyr::summarise(total_cases = sum(cases)) %>%
   tidyr::pivot_wider(names_from = type, values_from = total_cases) %>%
   dplyr::arrange(- confirmed) %>%
-  dplyr::filter(confirmed >= 100) %>%
+  dplyr::filter(confirmed >= 2000) %>%
   dplyr::mutate(recover_rate = recovered / confirmed,
                 death_rate = death / confirmed) %>% 
   dplyr::mutate(recover_rate = dplyr::if_else(is.na(recover_rate), 0, recover_rate),
