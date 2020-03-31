@@ -31,10 +31,6 @@ me](https://www.statsandr.com/contact/). More information about this
 dashboard can be found in this
 [article](https://www.statsandr.com/blog/).
 
-**Update**
-
-The dashboard has been updated on Saturday March 21, 2020.
-
 <br>
 
 *Go back to [www.statsandr.com](https://www.statsandr.com/) (blog) or

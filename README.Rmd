@@ -27,10 +27,6 @@ The input data for this dashboard is from the [`{coronavirus}`](https://github.c
 
 For any question or feedback, you can [contact me](https://www.statsandr.com/contact/). More information about this dashboard can be found in this [article](https://www.statsandr.com/blog/).
 
-**Update**
-
-The dashboard has been updated on `r format(Sys.time(), "%A %B %d, %Y")`.
-
 <br>
 
 *Go back to [www.statsandr.com](https://www.statsandr.com/) (blog) or [www.antoinesoetewey.com](https://www.antoinesoetewey.com/) (personal website)*.
