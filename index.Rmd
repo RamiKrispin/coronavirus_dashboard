@@ -156,6 +156,7 @@ df_trajectory <- df_china %>%
 
 ```
 
+
 Summary
 =======================================================================
 Row
@@ -208,7 +209,7 @@ valueBox(value = paste(format(sum(df$death, na.rm = TRUE), big.mark = ","), " ("
 Row
 -----------------------------------------------------------------------
 
-### Cases Distribution by Type (Top 25 Countries)
+### Cases Distribution by Type (Top 25 Countries) 
 
 ```{r daily_summary}
 
@@ -231,12 +232,21 @@ plotly::plot_ly(data = df[1:30,],
                     # textposition = 'auto',
                     name = "Death",
                     marker = list(color = death_color)) %>%
-  plotly::layout(barmode = 'stack',
+  plotly::layout(title = "",
+                 barmode = 'stack',
                  yaxis = list(title = "Total Cases (log scaled)",
                               type = "log"),
-                 xaxis = list(title = ""),
+                 xaxis = list(title = paste("Last update:", format(max(coronavirus::coronavirus$date), '%d %B'), sep = " ")),
                  hovermode = "compare",
-                  margin =  list(
+                 annotations = list(
+                   text = paste("Last update:", format(max(coronavirus::coronavirus$date), '%d %B'), sep = " "),
+                   xref = "paper",
+                   yref = "paper",
+                   showarrow = FALSE,
+                  x = 0.95,
+                  y = 1
+                 ),
+                 margin =  list(
                    # l = 60,
                    # r = 40,
                    b = 10,
@@ -245,7 +255,7 @@ plotly::plot_ly(data = df[1:30,],
                  ))
 
 
-  
+
 
 
 ```
@@ -508,6 +518,8 @@ About
 =======================================================================
 
 **The Coronavirus Dashboard**
+
+Last updated: `r format(max(coronavirus::coronavirus$date), '%d %B')`
 
 This Coronavirus dashboard provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the Rmakrdown framework and can easily reproduce by others. The code behind the dashboard available [here](https://github.com/RamiKrispin/coronavirus_dashboard)
 
