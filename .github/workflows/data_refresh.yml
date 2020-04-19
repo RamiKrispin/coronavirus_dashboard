@@ -1,0 +1,24 @@
+name: Data Refresh
+
+on: [push]
+  #schedule:
+    # * is a special character in YAML so you have to quote this string
+   # - cron:  '0 */6 * * *'
+jobs:
+  build:
+    name: refresh the dashboard
+    runs-on: macOS-latest
+    steps:
+      - name: checkout_repo
+        uses: actions/checkout@v2
+      - name: set_R
+        uses: r-lib/actions/setup-r@master
+        with:
+          repository: ${{ github.repository }}
+          ref: 'master'
+          token: ${{ github.token }}
+          clean: 'true'
+          fetch-depth: '1'
+      - name: Install dependencies
+        run: Rscript -e "install.packages(c('rmarkdown', 'remotes', 'dplyr', 'lubridate'))"
+      
