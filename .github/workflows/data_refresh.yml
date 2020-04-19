@@ -7,7 +7,7 @@ on: [push]
 jobs:
   build:
     name: refresh the dashboard
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: checkout_repo
         uses: actions/checkout@v2
@@ -21,12 +21,15 @@ jobs:
           fetch-depth: '1'
       - name: Install pandoc 
         run: |
+          #sudo apt-get update && sudo apt-get install pandoc
           brew install pandoc
           #brew install pandoc-citeproc
-      - name: Install leaflet
-        run: Rscript -e "install.packages(c('leaflet', 'leafpop'))"
+      - name: Install leafpop
+        run: Rscript -e "install.packages(c('leafpop'))"
       - name: Test leafpop
-        run: Rscript -e "?leafpop::popupTable"
+        run: Rscript -e  "?leafpop::popupTable"
+      - name: Install leaflet
+        run: Rscript -e "install.packages(c('leaflet'))"
       - name: Install CRAN packages
         run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'flexdashboard', 'dplyr', 'purrr', 'lubridate', 'plotly'))"
       - name: Install Github packages
