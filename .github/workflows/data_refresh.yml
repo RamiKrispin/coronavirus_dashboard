@@ -26,10 +26,10 @@ jobs:
           #brew install pandoc-citeproc
       - name: Install leaflet
         run: Rscript -e "install.packages(c('leaflet'))"
-      - name: Test leafpop
-        run: Rscript -e "devtools::install_github("r-spatial/leafpop")" -e  "?leafpop::popupTable"
       - name: Install CRAN packages
         run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'flexdashboard', 'dplyr', 'purrr', 'lubridate', 'plotly'))"
+      - name: Test leafpop
+        run: Rscript -e "devtools::install_github("r-spatial/leafpop")" -e  "?leafpop::popupTable"
       - name: Install Github packages
         run: Rscript -e "devtools::install_github('Covid19R/covid19Italy')" -e "devtools::install_github('Covid19R/coronavirus')"
       - name: Render the site
