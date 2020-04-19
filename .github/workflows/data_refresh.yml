@@ -19,6 +19,8 @@ jobs:
           token: ${{ github.token }}
           clean: 'true'
           fetch-depth: '1'
-      - name: Install dependencies
-        run: Rscript -e "install.packages(c('rmarkdown', 'remotes', 'dplyr', 'lubridate'))"
+      - name: Install CRAN packages
+        run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'remotes', 'dplyr', 'lubridate', 'leafletR', 'plotly'))"
+      - name: Install Github packages
+        run: Rscript -e "devtools::install_github("Covid19R/covid19Italy")" -e "devtools::install_github("covid19r/coronavirus")"
       
