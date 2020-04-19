@@ -25,7 +25,7 @@ jobs:
           brew install pandoc
           #brew install pandoc-citeproc
       - name: Install leafpop
-        run: Rscript -e "install.packages(c('leafpop', type = 'source')"
+        run: Rscript -e "install.packages(c('leafpop', type = 'source'))"
       - name: Test leafpop
         run: Rscript -e  "?leafpop::popupTable"
       - name: Install leaflet
