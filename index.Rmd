@@ -334,7 +334,7 @@ Map
 ```{r map}
 # map tab added by Art Steinmetz
 library(leaflet)
-# library(leafpop)
+library(leafpop)
 library(purrr)
 cv_data_for_plot <- coronavirus %>% 
   dplyr::filter(cases > 0) %>% 
