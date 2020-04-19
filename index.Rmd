@@ -331,10 +331,10 @@ Map
 
 **Map**
 
-```{r}
+```{r map}
 # map tab added by Art Steinmetz
 library(leaflet)
-library(leafpop)
+# library(leafpop)
 library(purrr)
 cv_data_for_plot <- coronavirus %>% 
   dplyr::filter(cases > 0) %>% 
@@ -355,7 +355,8 @@ names(cv_data_for_plot.split) %>%
                  stroke = FALSE,
                  fillOpacity = 0.8,
                  radius = ~log_cases,
-                 popup =  leafpop::popupTable(cv_data_for_plot.split[[df]],
+                 # popup =  leafpop::popupTable(cv_data_for_plot.split[[df]],
+                 popup =  popupTable(cv_data_for_plot.split[[df]],
                                               feature.id = FALSE,
                                               row.numbers = FALSE,
                                               zcol=c("type","cases","Country.Region","Province.State")),
@@ -380,7 +381,7 @@ Column {data-width=400}
     
 ### New Cases - Top 15 Countries (`r  max(coronavirus$date)`)
     
-```{r}
+```{r new_cases}
 max_date <- max(coronavirus$date)
 coronavirus %>% 
   dplyr::filter(type == "confirmed", date == max_date) %>%
