@@ -22,5 +22,5 @@ jobs:
       - name: Install CRAN packages
         run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'remotes', 'dplyr', 'lubridate', 'leafletR', 'plotly'))"
       - name: Install Github packages
-        run: Rscript -e "devtools::install_github("Covid19R/covid19Italy")" -e "devtools::install_github("covid19r/coronavirus")"
+        run: Rscript -e "devtools::install_github('Covid19R/covid19Italy')" -e "devtools::install_github('Covid19R/coronavirus')"
       
