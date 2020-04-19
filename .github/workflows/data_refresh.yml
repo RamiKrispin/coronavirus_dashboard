@@ -24,7 +24,7 @@ jobs:
           brew install pandoc
           #brew install pandoc-citeproc
       - name: Install CRAN packages
-        run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'remotes', 'dplyr', 'lubridate', 'leafletR', 'plotly'))"
+        run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'flexdashboard', 'dplyr', 'lubridate', 'leafletR', 'plotly'))"
       - name: Install Github packages
         run: Rscript -e "devtools::install_github('Covid19R/covid19Italy')" -e "devtools::install_github('Covid19R/coronavirus')"
       - name: Render the site
