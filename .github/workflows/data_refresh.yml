@@ -19,6 +19,10 @@ jobs:
           token: ${{ github.token }}
           clean: 'true'
           fetch-depth: '1'
+      - name: Install pandoc 
+        run: |
+          brew install pandoc
+          #brew install pandoc-citeproc
       - name: Install CRAN packages
         run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'remotes', 'dplyr', 'lubridate', 'leafletR', 'plotly'))"
       - name: Install Github packages
