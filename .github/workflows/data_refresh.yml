@@ -21,7 +21,8 @@ jobs:
           fetch-depth: '1'
       - name: Install pandoc 
         run: |
-          brew install pandoc
+          sudo apt-get update && sudo apt-get install pandoc
+          #brew install pandoc
           #brew install pandoc-citeproc
       - name: Install leaflet
         run: Rscript -e "install.packages(c('leaflet', 'leafpop'))"
