@@ -24,6 +24,8 @@ jobs:
           sudo apt-get update && sudo apt-get install pandoc
           #brew install pandoc
           #brew install pandoc-citeproc
+      - name: Install devtools
+        run: Rscript -e "install.packages(c('devtools'))"
       - name: Install leaflet
         run: Rscript -e "install.packages(c('leaflet'))"
       - name: Install CRAN packages
