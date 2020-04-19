@@ -25,9 +25,9 @@ jobs:
           #brew install pandoc
           #brew install pandoc-citeproc
       - name: Install leaflet
-        run: Rscript -e "install.packages(c('leaflet', 'leafpop'))"
+        run: Rscript -e "install.packages(c('leaflet'))"
       - name: Test leafpop
-        run: Rscript -e "?leafpop::popupTable"
+        run: Rscript -e "devtools::install_github("r-spatial/leafpop")" -e  "?leafpop::popupTable"
       - name: Install CRAN packages
         run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'flexdashboard', 'dplyr', 'purrr', 'lubridate', 'plotly'))"
       - name: Install Github packages
