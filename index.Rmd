@@ -11,6 +11,9 @@ output:
 ```{r setup, include=FALSE}
 #------------------ Packages ------------------
 library(flexdashboard)
+library(leaflet)
+library(leafpop)
+library(purrr)
 
 #checks if there is data update on the Github version
 coronavirus::update_datasets(silence = TRUE)
@@ -333,9 +336,7 @@ Map
 
 ```{r map}
 # map tab added by Art Steinmetz
-library(leaflet)
-library(leafpop)
-library(purrr)
+
 cv_data_for_plot <- coronavirus %>% 
   dplyr::filter(cases > 0) %>% 
   dplyr::group_by(Country.Region,Province.State,Lat,Long,type) %>% 
