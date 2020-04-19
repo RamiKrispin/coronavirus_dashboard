@@ -28,10 +28,8 @@ jobs:
         run: Rscript -e "install.packages(c('leafpop'))"
       - name: Test leafpop
         run: Rscript -e  "?leafpop::popupTable"
-      #- name: Install devtools
-      #  run: Rscript -e "install.packages(c('devtools'))"
-      #- name: Install leaflet
-      #  run: Rscript -e "install.packages(c('leaflet'))"
+      - name: Install leaflet
+        run: Rscript -e "install.packages(c('leaflet'))"
       #- name: Install CRAN packages
       #  run: Rscript -e "install.packages(c('devtools', 'rmarkdown', 'flexdashboard', 'dplyr', 'purrr', 'lubridate', 'plotly'))"
       #- name: Test leafpop
