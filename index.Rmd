@@ -15,9 +15,6 @@ library(leaflet)
 library(leafpop)
 library(purrr)
 
-#checks if there is data update on the Github version
-coronavirus::update_datasets(silence = TRUE)
-
 library(coronavirus)
 library(covid19italy)
 
