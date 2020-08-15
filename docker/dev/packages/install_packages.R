@@ -9,6 +9,8 @@ pkg_list <- c("dplyr",
               "rmarkdown",
               "flexdashboard",
               "tidyr",
+              "plotly",
+              "reactable",
               "leaflet",
               "leafpop")
 
