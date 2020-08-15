@@ -1,0 +1,18 @@
+name: Data Refresh
+
+on:
+  schedule:  
+    - cron:  '0 */8 * * *'
+jobs:
+  build:
+    name: refresh the dashboard
+    runs-on: ubuntu-18.04 
+    container: 
+     image: rkrispin/coronavirus_dashboard:dev
+    steps:
+      - name: checkout_repo
+        uses: actions/checkout@v2
+        with: 
+          ref: 'master'
+      - name: Render Rmarkdown
+        run: bash ./bash/data_refresh.sh
