@@ -28,6 +28,5 @@ for(i in pkg_list){
   if(fail){
     stop("Fail to install some package/s")
   }
-
 }
 
