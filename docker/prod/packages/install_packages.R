@@ -9,6 +9,8 @@ pkg_list <- c("dplyr",
               "rmarkdown",
               "flexdashboard",
               "tidyr",
+              "plotly",
+              "reactable",
               "leaflet",
               "leafpop")
 
@@ -17,7 +19,7 @@ install.packages(pkgs = pkg_list, repos = "https://cran.rstudio.com/")
 fail <- FALSE
 
 for(i in pkg_list){
-
+  
   if(i %in% rownames(installed.packages())){
     cat(i, "...OK\n")
   } else {
