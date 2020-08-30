@@ -7,8 +7,6 @@
 /Users/ramikrispin/R/packages/coronavirus_flexdashboard/docker/dev/packages/Dockerfile="BA850258"
 /Users/ramikrispin/R/packages/coronavirus_flexdashboard/docker/dev/packages/install_packages.R="B070D806"
 /Users/ramikrispin/R/packages/coronavirus_flexdashboard/docker/dev/rstudio/Dockerfile="1471600F"
-/Users/ramikrispin/R/packages/coronavirus_flexdashboard/docker/packages/Dockerfile="B207A399"
 /Users/ramikrispin/R/packages/coronavirus_flexdashboard/docker/prod/packages/Dockerfile="AA632784"
 /Users/ramikrispin/R/packages/coronavirus_flexdashboard/docker/prod/packages/install_packages.R="AD241F4E"
 /Users/ramikrispin/R/packages/coronavirus_flexdashboard/index.Rmd="25016FA3"
-/Users/ramikrispin/R/packages/coronavirus_flexdashboard/test.Rmd="D0A17D27"
