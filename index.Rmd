@@ -21,8 +21,19 @@ confirmed_color <- "purple"
 active_color <- "#1f77b4"
 recovered_color <- "forestgreen"
 death_color <- "red"
+env <- "master"
 #------------------ Data ------------------
-df <- read.csv("https://raw.githubusercontent.com/RamiKrispin/coronavirus/master/csv/coronavirus.csv", stringsAsFactors = FALSE) %>%
+# df <- read.csv("https://raw.githubusercontent.com/RamiKrispin/coronavirus/master/csv/coronavirus.csv", stringsAsFactors = FALSE) %>%
+#   dplyr::mutate(country = ifelse(country == "United Arab Emirates", "UAE", country),
+#                 country = ifelse(country == "Mainland China", "China", country),
+#                 country = ifelse(country == "North Macedonia", "N.Macedonia", country),
+#                 country = trimws(country),
+#                 country = factor(country, levels = unique(country)))
+
+
+df <- readr::read_csv(file = sprintf("https://raw.githubusercontent.com/RamiKrispin/coronavirus/%s/csv/coronavirus.csv", env),
+                            col_types = readr::cols(date = readr::col_date(format = "%Y-%m-%d"),
+                                                    cases = readr::col_number())) %>%
   dplyr::mutate(country = ifelse(country == "United Arab Emirates", "UAE", country),
                 country = ifelse(country == "Mainland China", "China", country),
                 country = ifelse(country == "North Macedonia", "N.Macedonia", country),
