@@ -6,6 +6,108 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.height=5, fig.width=8, 
+                      message=FALSE, warning=FALSE)
+
+`%>%` <- magrittr::`%>%`
+```
+
+
+
+### Pulling the data
+
+```{r}
+# Setting the branch
+env <- "dev"
+
+df <- readr::read_csv(file = sprintf("https://raw.githubusercontent.com/RamiKrispin/coronavirus/%s/csv/coronavirus.csv", env),
+                      col_types = readr::cols(date = readr::col_date(format = "%Y-%m-%d"),
+                                              cases = readr::col_number(),
+                                              continent_code = readr::col_character())) %>%
+  dplyr::mutate(continent_code = ifelse(continent_name == "North America", "NA", continent_code))
+
+str(df)
+
+head(df)
+```
+
+
+
+### Dataviz
+
+
+Plotting the confirmed and death cases by country
+
+```{r country_treemap}
+df_tree <- df %>%
+  dplyr::group_by(country, type) %>%
+  dplyr::summarise(total = sum(cases), .groups = "drop") %>%
+  tidyr::pivot_wider(names_from = type, values_from = total) %>%
+  dplyr::select(country, Confirmed = confirmed, Death = death, - recovered) %>%
+  tidyr::pivot_longer(cols = -country, names_to = "type", values_to = "total")
+
+plotly::plot_ly(
+  data = df_tree %>% dplyr::filter(type == "Confirmed"),
+  type= "treemap",
+  values = ~total,
+  labels= ~ country,
+  parents=  ~type,
+  domain = list(column=0),
+  name = "Confirmed",
+  textinfo="label+value+percent parent"
+)  %>%
+  plotly::add_trace(
+    data = df_tree %>% dplyr::filter(type == "Death"),
+    type= "treemap",
+    values = ~total,
+    labels= ~ country,
+    parents=  ~type,
+    domain = list(column=1),
+    name = "Death",
+    textinfo="label+value+percent parent"
+  ) %>%
+  plotly::layout(grid=list(columns=2, rows=1))
+
+```
+
+
+
+Confirmed cases by continent
+
+```{r confirmed_continent, fig.height=5, fig.width=10}
+df_c <- df %>% 
+  dplyr::group_by(date, continent_name, continent_code, type) %>%
+  dplyr::summarise(total = sum(cases),
+                   .groups = "drop") %>%
+  dplyr::filter(type != "recovered") %>%
+  dplyr::filter(!is.na(continent_name))
+
+# Smooting outlier
+df_c$total[which(df_c$date == as.Date("2021-05-20") & 
+                   df_c$type == "confirmed" &
+                   df_c$continent_name == "Europe")] <- (df_c$total[which(df_c$date == as.Date("2021-05-19") & 
+                                                                           df_c$type == "confirmed" &
+                                                                           df_c$continent_name == "Europe")] + 
+                                                           df_c$total[which(df_c$date == as.Date("2021-05-21") & 
+                                                                              df_c$type == "confirmed" &
+                                                                              df_c$continent_name == "Europe")]) / 2
+
+
+plotly::plot_ly(data = df_c %>% dplyr::filter(type == "confirmed"),
+                x = ~ date,
+                y = ~ total,
+                type = 'scatter', 
+                mode = 'none', 
+                groupnorm = 'percent',
+                color = ~ continent_name,
+                stackgroup = 'one') %>%
+  plotly::layout(title = "Dist. of Confirimed Cases by Continent",
+                 yaxis = list(title = "",
+                              showgrid = FALSE,
+                              ticksuffix = "%"),
+                 xaxis = list(title = "Source: Johns Hopkins University Center for Systems Science and Engineering",
+                              showgrid = FALSE), 
+                 margin = list(t = 40))
 ```
 
