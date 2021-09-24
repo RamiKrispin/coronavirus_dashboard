@@ -1,5 +1,5 @@
 ---
-title: "Coronavirus Dashboard"
+title: "Deprecated Coronavirus Dashboard"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
