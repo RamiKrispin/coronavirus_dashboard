@@ -1,4 +1,5 @@
-coronavirus::update_dataset()
+`%>%` <- magrittr::`%>%`
+# coronavirus::update_dataset()
 # reset the session
 library(coronavirus)
 data("coronavirus")
@@ -6,42 +7,63 @@ max(coronavirus$date)
 head(coronavirus)
 table(coronavirus$continent_name, useNA = "always")
 table(coronavirus$province, useNA = "always")
-df <- coronavirus %>% 
-  dplyr::filter(!is.na(continent_code),
-                is.na(province)) 
+# df <- coronavirus %>% 
+#   dplyr::filter(!is.na(continent_code),
+#                 is.na(province)) 
+# 
+# head(df)
 
-head(df)
+head(coronavirus)
+gis_codes <- coronavirus %>% 
+  dplyr::select(country, combined_key, continent_name, continent_code) %>%
+  dplyr::distinct()
+
+gis_codes_coronavirues <- readr::read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv",
+                                          col_types = readr::cols(FIPS = readr::col_number(),
+                                                                  Admin2 = readr::col_character()))
+
+names(gis_codes_coronavirues) <- tolower(names(gis_codes_coronavirues))
+names(gis_codes_coronavirues)[which(names(gis_codes_coronavirues) == "long_")] <- "long"
+head(as.data.frame(gis_codes_coronavirues))
+
+df <- coronavirus::refresh_coronavirus_jhu() %>%
+  dplyr::left_join(gis_codes, by = c("location" = "country"))
 
 
 
 
-
-
-df <- coronavirus::refresh_coronavirus_jhu()
+nrow(df)
 max(df$date)
 
 head(df)
-head(df_cases)
-unique(df_cases$province)
-table(df_cases$province, useNA = "always")
-unique(df_cases$country)
+# head(df_cases)
+# unique(df_cases$province)
+# table(df_cases$province, useNA = "always")
+# unique(df_cases$country)
 
-df <- df_cases %>% dplyr::filter(is.na(province),
-                                 type != "recovery") %>%
-  dplyr::select(date, country, type, cases, population) %>%
-  tidyr::pivot_wider(names_from = type, values_from = cases)
-head(df)
-tail(df)
+# df <- df_cases %>% dplyr::filter(is.na(province),
+#                                  type != "recovery") %>%
+#   dplyr::select(date, country, type, cases, population) %>%
+#   tidyr::pivot_wider(names_from = type, values_from = cases)
+# head(df)
+# tail(df)
+
+combined_key == "United Kingdom"
 
 df_agg <- df %>% 
-  dplyr::group_by(country) %>%
-  dplyr::summarise(confirmed = sum(confirmed),
-                   death = sum(death)) %>%
+  dplyr::filter(location_type == "country",
+                data_type != "recovered_new") %>%
+  dplyr::filter(location == combined_key ) %>%
+  tidyr::pivot_wider(names_from = data_type, values_from = value) %>%
+  dplyr::group_by(location) %>%
+  dplyr::summarise(confirmed = sum(cases_new),
+                   death = sum(deaths_new)) %>%
   dplyr::arrange(- death) %>%
-  dplyr::left_join(df %>% 
-                     dplyr::select(country, population) %>% 
+  dplyr::left_join(gis_code_mapping %>% 
+                     dplyr::filter(is.na(province_state)) %>%
+                     dplyr::select(location = combined_key, population) %>% 
                      dplyr::distinct(),
-                   by = "country") %>%
+                   by = "location") %>%
   dplyr::mutate(rate = death / confirmed,
                 rate_pop = death / population,
                 death_per_100k = death / (population / 1000000)) %>%
@@ -162,25 +184,55 @@ plotly::plot_ly() %>%
                  margin = list(r = 60, l = 60, t = 20, b = 70))
 
 
+head(df)
+head(df_agg)
+
+df_tree <- df_agg %>% 
+  dplyr::select(country, confirmed, death) %>%
+  tidyr::pivot_longer(cols = -country) %>%
+  dplyr::mutate(perent = dplyr::if_else(name == "confirmed", "Confirmed", "Death"))
+  
+  
+plotly::plot_ly(
+  data = df_tree %>% dplyr::filter(name == "confirmed"),
+  type= "treemap",
+  values = ~value,
+  labels= ~ country,
+  parents=  ~ perent,
+  domain = list(column=0),
+  name = "Confirmed",
+  textinfo="label+value+percent parent"
+)  %>%
+  plotly::add_trace(
+    data = df_tree %>% dplyr::filter(name == "death"),
+    type= "treemap",
+    values = ~ value,
+    labels= ~ country,
+    parents=  ~ perent,
+    domain = list(column=1),
+    name = "Death",
+    textinfo="label+value+percent parent"
+  ) %>%
+  plotly::layout(grid=list(columns=2, rows=1))
 
 
-library(pracma)
-library(plotly)
 
-x = linspace(1, 200, 30)
-data.frame(x = x, y = x**3)
-fig <- plot_ly(x = x, y = x**3, type = 'scatter', mode = 'markers') %>%
-  layout(xaxis = list(range = c(log10(0.8), log10(250)),
-                      type = 'log',
-                      zerolinecolor = '#ffff',
-                      zerolinewidth = 2,
-                      gridcolor = 'ffff',
-                      title = 'x'),
-         yaxis = list(type = 'log',
-                      zerolinecolor = '#ffff',
-                      zerolinewidth = 2,
-                      gridcolor = 'ffff',
-                      title = 'y'),
-         plot_bgcolor='#e5ecf6')
 
-fig
+df_cases_c <- df_cases %>% 
+  dplyr::group_by(date, continent_name, continent_code, type) %>%
+  dplyr::summarise(total = sum(cases),
+                   .groups = "drop") %>%
+  dplyr::filter(type != "recovery") %>%
+  dplyr::filter(!is.na(continent_name))
+
+# Smooting outlier
+df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-20") & 
+                         df_cases_c$type == "confirmed" &
+                         df_cases_c$continent_name == "Europe")] <- (df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-19") & 
+                                                                                              df_cases_c$type == "confirmed" &
+                                                                                              df_cases_c$continent_name == "Europe")] + 
+                                                                       df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-21") & 
+                                                                                                df_cases_c$type == "confirmed" &
+                                                                                                df_cases_c$continent_name == "Europe")]) / 2
+head(df_cases_c)
+head(df)
