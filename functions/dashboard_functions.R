@@ -144,7 +144,7 @@ mortality_plot <- function(coronavirus_jhu = coronavirus::refresh_coronavirus_jh
                       y = c(0.1 * per_line_start, 0.1 * 100 * 10 ^ 6),
                       showlegend = FALSE,
                       line = list(color = per_line_color, width = per_line_width)) %>%
-    plotly::layout(yaxis = list(title = "Death",
+    plotly::layout(yaxis = list(title = "Deaths",
                                 type = 'log',
                                 zerolinecolor = '#ffff',
                                 zerolinewidth = 2,
