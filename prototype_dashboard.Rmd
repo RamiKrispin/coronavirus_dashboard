@@ -1,5 +1,5 @@
 ---
-title: "Prototype Coronavirus Dashboard"
+title: "Coronavirus Dashboard"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -111,24 +111,23 @@ About
 
 ### About
 
-**The Coronavirus Dashboard**
+**The Coronavirus Dashboard** 
 
-This Coronavirus dashboard provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the [Rmakrdown](https://rmarkdown.rstudio.com/) using [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) framework and can easily reproduce by others. The code behind the dashboard available [here](https://github.com/RamiKrispin/coronavirus_dashboard)
+This is a supporting dashboard for the [coronavirus](https://github.com/RamiKrispin/coronavirus) R package. It provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the [Rmakrdown](https://rmarkdown.rstudio.com/) using [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) framework and can easily reproduce by others. The code behind the dashboard is available on this [repo](https://github.com/RamiKrispin/coronavirus_dashboard).
 
 **Data**
 
 The input data for this dashboard is the [coronavirus](https://github.com/RamiKrispin/coronavirus) R package (dev version). The data and dashboard is refreshed on a daily bases. The raw data pulled from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus [repository](https://github.com/RamiKrispin/coronavirus-csv)
 
-
-
-
 **Packages**
 
 * Dashboard interface - the [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) package. 
 * Visualization - the [plotly](https://plot.ly/r/) package
-* Data manipulation - [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/), and [purrr](https://purrr.tidyverse.org/) packages
-* Mapping - [leaflet](https://rstudio.github.io/leaflet/) and [leafpop](https://github.com/r-spatial/leafpop) packages
-* Tables - the [reactable](https://glin.github.io/reactable/) package
+* Data manipulation - [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/) packages
+
+**License**
+
+All the code under this dashboard is completely open-sourced under MIT license
 
 **Deployment and reproducibly**
 
