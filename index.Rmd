@@ -127,7 +127,7 @@ The input data for this dashboard is the [coronavirus](https://github.com/RamiKr
 
 **License**
 
-All the code under this dashboard is completely open-sourced under MIT license
+All the code under this dashboard is completely open-sourced under [MIT](https://opensource.org/licenses/MIT) license
 
 **Deployment and reproducibly**
 
@@ -138,4 +138,3 @@ The dashboard was deployed to Github docs. If you wish to deploy and/or modify t
 * Here some general guidance about deployment of flexdashboard on Github page - [link](https://github.com/pbatey/flexdashboard-example)
 
 For any question or feedback, you can either open an [issue](https://github.com/RamiKrispin/coronavirus_dashboard/issues) or contact me on [Twitter](https://twitter.com/Rami_Krispin).
-
