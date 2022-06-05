@@ -13,6 +13,8 @@ and can easily reproduce by others. The code behind the dashboard is
 available on this
 [repo](https://github.com/RamiKrispin/coronavirus_dashboard).
 
+<img src="figures/dash_summary.png" width="100%" />
+
 **Data**
 
 The input data for this dashboard is the
