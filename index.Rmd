@@ -1,0 +1,141 @@
+---
+title: "Coronavirus Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+`%>%` <- magrittr::`%>%`
+library(flexdashboard)
+source("./functions/dashboard_functions.R")
+load("./data/gis_mapping.RData")
+coronavirus_jhu = coronavirus::refresh_coronavirus_jhu()
+gis_codes = get_gis_codes()
+corona_agg <- coronavirus_agg(coronavirus_jhu = coronavirus_jhu,
+                gis_codes = gis_codes)
+df_cases2 <- coronavirus_jhu %>%
+  dplyr::filter(location_type == "country",
+                !is.na(location_code),
+                data_type != "recovered_new") %>%
+  dplyr::left_join(gis_codes %>% 
+                     dplyr::select(-lat, - long) %>%
+                     dplyr::filter(combined_key == country_region, 
+                                               is.na(province_state)), by = c("location" = "combined_key")) %>%
+  dplyr::left_join(continent_mapping %>% dplyr::select(continent_name, continent_code, iso2), by = "iso2")
+  
+head(df_cases2)
+table(is.na(df_cases2$continent_name))
+df_cases_c <- df_cases2 %>% 
+  dplyr::filter(data_type == "cases_new",
+                !is.na(continent_name)) %>%
+  dplyr::group_by(date, continent_name) %>%
+  dplyr::summarise(total = sum(value), .groups = "drop")
+
+# Smoothing outliers
+head(df_cases_c)
+table(is.na(df_cases_c$total))
+table(is.na(df_cases_c$continent_name))
+
+
+df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-20") & 
+                         df_cases_c$continent_name == "Europe")] <- (df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-19") & 
+                                                                                              df_cases_c$continent_name == "Europe")] + 
+                                                                       df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-21") & 
+                                                                                                df_cases_c$continent_name == "Europe")]) / 2
+
+```
+
+Summary
+===================================== 
+
+Row 
+-----------------------------------------------------------------------
+
+### Mortality Rate - Death / Confirmed Cases Ratio
+
+```{r}
+mortality_plot(coronavirus_agg = corona_agg)
+```
+
+
+### Confirmed Cases Distribution by Country
+
+```{r}
+d <- corona_agg %>% dplyr::mutate(parent = "Confirmed")
+
+plotly::plot_ly(
+  data = d,
+  type= "treemap",
+  values = ~confirmed,
+  labels= ~ location,
+  parents=  ~ parent,
+  domain = list(column=0),
+  #name = "Confirmed",
+  textinfo="label+value+percent parent"
+)  %>%
+  plotly::layout(margin = list(r = 0, l = 0, t = 0, b = 0))
+
+```
+
+
+Row 
+-----------------------------------------------------------------------
+
+
+### Distribution of Confirimed Cases by Continent
+
+```{r}
+plotly::plot_ly(data = df_cases_c,
+                x = ~ date,
+                y = ~ total,
+                type = 'scatter', 
+                mode = 'none', 
+                groupnorm = 'percent',
+                color = ~ continent_name,
+                stackgroup = 'one') %>%
+  plotly::layout(yaxis = list(title = "",
+                              showgrid = FALSE,
+                              hoverformat = ".2f",
+                              ticksuffix = "%"),
+                 xaxis = list(title = "",
+                              showgrid = FALSE), 
+                 margin = list(r = 10, l = 10, t = 0, b = 10),
+                 hovermode = "x unified")
+```
+
+
+About
+===================================== 
+
+### About
+
+**The Coronavirus Dashboard** 
+
+This is a supporting dashboard for the [coronavirus](https://github.com/RamiKrispin/coronavirus) R package. It provides an overview of the 2019 Novel Coronavirus COVID-19 (2019-nCoV) epidemic. This dashboard is built with R using the [Rmakrdown](https://rmarkdown.rstudio.com/) using [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) framework and can easily reproduce by others. The code behind the dashboard is available on this [repo](https://github.com/RamiKrispin/coronavirus_dashboard).
+
+**Data**
+
+The input data for this dashboard is the [coronavirus](https://github.com/RamiKrispin/coronavirus) R package (dev version). The data and dashboard is refreshed on a daily bases. The raw data pulled from the Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) Coronavirus [repository](https://github.com/RamiKrispin/coronavirus-csv)
+
+**Packages**
+
+* Dashboard interface - the [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) package. 
+* Visualization - the [plotly](https://plot.ly/r/) package
+* Data manipulation - [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/) packages
+
+**License**
+
+All the code under this dashboard is completely open-sourced under MIT license
+
+**Deployment and reproducibly**
+
+The dashboard was deployed to Github docs. If you wish to deploy and/or modify the dashboard on your Github account, you can apply the following steps:
+
+* Fork the dashboard [repository](https://github.com/RamiKrispin/coronavirus_dashboard), or
+* Clone it and push it to your Github package
+* Here some general guidance about deployment of flexdashboard on Github page - [link](https://github.com/pbatey/flexdashboard-example)
+
+For any question or feedback, you can either open an [issue](https://github.com/RamiKrispin/coronavirus_dashboard/issues) or contact me on [Twitter](https://twitter.com/Rami_Krispin).
+
