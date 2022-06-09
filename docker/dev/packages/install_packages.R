@@ -1,5 +1,6 @@
 # installing package imports packages
-pkg_list <- c("dplyr",
+pkg_list <- c("readr",
+              "dplyr",
               "tibble",
               "devtools",
               "here",
