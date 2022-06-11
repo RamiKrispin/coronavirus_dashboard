@@ -1,0 +1,210 @@
+---
+title: "Dashboard Prototype"
+author: '@Rami_Krispin'
+date: "9/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.height=5, fig.width=8, 
+                      message=FALSE, warning=FALSE)
+
+`%>%` <- magrittr::`%>%`
+```
+
+
+
+### Pulling the data
+
+```{r}
+# Setting the branch
+env <- "master"
+
+df_cases <- readr::read_csv(file = sprintf("https://raw.githubusercontent.com/RamiKrispin/coronavirus/%s/csv/coronavirus.csv", env),
+                      col_types = readr::cols(date = readr::col_date(format = "%Y-%m-%d"),
+                                              cases = readr::col_number(),
+                                              continent_code = readr::col_character())) %>%
+  dplyr::mutate(continent_code = ifelse(continent_name == "North America", "NA", continent_code))
+
+
+
+str(df_cases)
+
+head(df_cases)
+
+
+df_vac <- readr::read_csv(file = sprintf("https://raw.githubusercontent.com/RamiKrispin/coronavirus/%s/csv/covid19_vaccine.csv", env),
+                      col_types = readr::cols(date = readr::col_date(format = "%Y-%m-%d"),
+                                              cases = readr::col_number(),
+                                              continent_code = readr::col_character())) %>%
+  dplyr::mutate(continent_code = ifelse(continent_name == "North America", "NA", continent_code))
+
+head(df_vac)
+```
+
+
+
+### Dataviz
+
+
+Plotting the confirmed and death cases by country
+
+```{r country_treemap}
+df_cases_tree <- df_cases %>%
+  dplyr::group_by(country, type) %>%
+  dplyr::summarise(total = sum(cases), .groups = "drop") %>%
+  tidyr::pivot_wider(names_from = type, values_from = total) %>%
+  dplyr::select(country, Confirmed = confirmed, Death = death, - recovery) %>%
+  tidyr::pivot_longer(cols = -country, names_to = "type", values_to = "total")
+
+plotly::plot_ly(
+  data = df_cases_tree %>% dplyr::filter(type == "Confirmed"),
+  type= "treemap",
+  values = ~total,
+  labels= ~ country,
+  parents=  ~type,
+  domain = list(column=0),
+  name = "Confirmed",
+  textinfo="label+value+percent parent"
+)  %>%
+  plotly::add_trace(
+    data = df_cases_tree %>% dplyr::filter(type == "Death"),
+    type= "treemap",
+    values = ~total,
+    labels= ~ country,
+    parents=  ~type,
+    domain = list(column=1),
+    name = "Death",
+    textinfo="label+value+percent parent"
+  ) %>%
+  plotly::layout(grid=list(columns=2, rows=1))
+
+```
+
+
+
+Confirmed cases by continent
+
+```{r confirmed_continent, fig.height=5, fig.width=10}
+df_cases_c <- df_cases %>% 
+  dplyr::group_by(date, continent_name, continent_code, type) %>%
+  dplyr::summarise(total = sum(cases),
+                   .groups = "drop") %>%
+  dplyr::filter(type != "recovery") %>%
+  dplyr::filter(!is.na(continent_name))
+
+# Smooting outlier
+df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-20") & 
+                   df_cases_c$type == "confirmed" &
+                   df_cases_c$continent_name == "Europe")] <- (df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-19") & 
+                                                                           df_cases_c$type == "confirmed" &
+                                                                           df_cases_c$continent_name == "Europe")] + 
+                                                           df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-21") & 
+                                                                              df_cases_c$type == "confirmed" &
+                                                                              df_cases_c$continent_name == "Europe")]) / 2
+
+
+plotly::plot_ly(data = df_cases_c %>% dplyr::filter(type == "confirmed"),
+                x = ~ date,
+                y = ~ total,
+                type = 'scatter', 
+                mode = 'none', 
+                groupnorm = 'percent',
+                color = ~ continent_name,
+                stackgroup = 'one') %>%
+  plotly::layout(title = "Dist. of Confirimed Cases by Continent",
+                 yaxis = list(title = "",
+                              showgrid = FALSE,
+                              ticksuffix = "%"),
+                 xaxis = list(title = "Source: Johns Hopkins University Center for Systems Science and Engineering",
+                              showgrid = FALSE), 
+                 margin = list(t = 40, b = 40))
+```
+
+
+Plotting vaccine data
+
+```{r}
+head(df_vac)
+
+df_v <- df_vac %>% 
+  dplyr::filter(date == max(date),
+         !is.na(population)) %>% 
+  dplyr::mutate(fully_vaccinated_ratio = people_fully_vaccinated / population) %>%
+  dplyr::arrange(- fully_vaccinated_ratio)
+
+head(df_v, 10)
+
+
+
+```
+
+Top 20 vaccinated countries
+
+```{r}
+top_20 <- df_v %>% 
+  dplyr::slice_head(n = 20) %>%
+  dplyr::arrange(fully_vaccinated_ratio) %>%
+  dplyr::mutate(country = factor(country_region, levels = country_region))
+  
+plotly::plot_ly(data = top_20,
+        y = ~ country,
+        x = ~ round(100 * fully_vaccinated_ratio, 2),
+        text = ~ paste(round(100 * fully_vaccinated_ratio, 1), "%"),
+        textposition = 'auto',
+        orientation = "h",
+        type = "bar") %>%
+  plotly::layout(title = "Proportion of Fully Vaccineted Population - Top 20 Countries",
+         yaxis = list(title = ""),
+         xaxis = list(title = "Percentage", ticksuffix = "%"))
+```
+
+
+```{r}
+continent_df <- df_v %>%
+  dplyr::filter(!is.na(continent_name),
+         !is.na(fully_vaccinated_ratio))
+
+table(continent_df$continent_name)
+#> 
+#>        Africa          Asia        Europe North America       Oceania 
+#>            34            41            44            21             5 
+#> South America 
+#>            12
+
+p <- list()
+
+for(i in unique(continent_df$continent_name)){
+  d <- NULL
+  
+  d <- continent_df %>% 
+    dplyr::filter(continent_name == i) %>% 
+    dplyr::arrange(fully_vaccinated_ratio) %>%
+    dplyr::mutate(country = factor(country_region, levels = country_region))
+  
+  p[[i]] <-  plotly::plot_ly(data = d,
+          y = ~ country,
+          x = ~ round(100 * fully_vaccinated_ratio, 2),
+          orientation = "h",
+          showlegend = FALSE,
+          name = i,
+          type = "bar") %>%
+    plotly::layout(title = "Percentage of Fully Vaccineted Population by Continent and Country",
+           yaxis = list(title = ""),
+           xaxis = list(title = "", ticksuffix = "%")) %>%
+    plotly::add_annotations(text = i,
+                    xref = "paper",
+                    yref = "paper",
+                    x = 0.5,
+                    y = 0.1,
+                    align = "right",
+                    showarrow = FALSE)
+  
+  
+}
+
+
+plotly::subplot(p, nrows = 3, shareX = TRUE, margin = 0.06)
+```
+
