@@ -13,7 +13,8 @@ pkg_list <- c("readr",
               "plotly",
               "reactable",
               "leaflet",
-              "leafpop")
+              "leafpop",
+              "coronavirus")
 
 install.packages(pkgs = pkg_list, repos = "https://cran.rstudio.com/")
 
