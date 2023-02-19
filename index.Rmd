@@ -45,7 +45,21 @@ df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-20") &
                                                                        df_cases_c$total[which(df_cases_c$date == as.Date("2021-05-21") & 
                                                                                                 df_cases_c$continent_name == "Europe")]) / 2
 
+last_update <- max(df_cases_c$date)
+
 ```
+
+
+<script>
+document.querySelector(".navbar-header > span.navbar-brand > span.navbar-author").innerHTML = "Data Up-To-Date: `r last_update`";
+</script>
+
+<style>
+.navbar-author {
+  position: absolute;
+  right: 1rem;
+}
+</style>
 
 Summary
 ===================================== 
@@ -87,6 +101,15 @@ Row
 ### Distribution of Confirimed Cases by Continent
 
 ```{r}
+# Fix for South America negative values during Dec 25 2022
+# Using average of previous and next day
+
+df_cases_c$total[which(df_cases_c$date == as.Date("2022-12-25") & 
+                   df_cases_c$continent_name == "South America")] <- (df_cases_c$total[which(df_cases_c$date == as.Date("2022-12-24") & 
+                                                                                              df_cases_c$continent_name == "South America")] +
+  df_cases_c$total[which(df_cases_c$date == as.Date("2022-12-26") & 
+                           df_cases_c$continent_name == "South America")] ) / 2
+
 plotly::plot_ly(data = df_cases_c,
                 x = ~ date,
                 y = ~ total,
