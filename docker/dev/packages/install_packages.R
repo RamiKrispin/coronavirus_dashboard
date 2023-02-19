@@ -13,11 +13,12 @@ pkg_list <- c("readr",
               "plotly",
               "reactable",
               "leaflet",
-              "leafpop")
+              "leafpop",
+              "coronavirus")
 
 install.packages(pkgs = pkg_list, repos = "https://cran.rstudio.com/")
 
-devtools::install_github("RamiKrispin/coronavirus", upgrade = "never")
+# devtools::install_github("RamiKrispin/coronavirus", upgrade = "never")
 
 fail <- FALSE
 
