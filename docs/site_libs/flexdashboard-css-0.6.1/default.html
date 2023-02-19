@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+$for(author-meta)$
+<meta name="author" content="$author-meta$" />
+$endfor$
+
+$if(date-meta)$
+<meta name="date" content="$date-meta$" />
+$endif$
+
+
+<title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
+
+<meta property="og:title" content="$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$" />
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+<link rel="icon" $if(favicon)$href="$favicon$"$else$href="data:image/x-icon;" type="image/x-icon"$endif$>
+
+$if(highlighting-css)$
+<style type="text/css">
+$highlighting-css$
+</style>
+$endif$
+
+<script type="text/javascript">
+window.FlexDashboardComponents = [];
+</script>
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+$if(shiny-prerendered)$
+<!-- HEAD_CONTENT -->
+$endif$
+
+$if(devel)$
+<link rel="stylesheet" href="../rmarkdown/templates/flex_dashboard/resources/flexdashboard.css" type="text/css" />
+<link rel="stylesheet" href="../rmarkdown/templates/flex_dashboard/resources/fillpage.css" type="text/css" />
+<link rel="stylesheet" href="../rmarkdown/templates/flex_dashboard/resources/theme-$theme$.css" type="text/css" />
+<script type="text/javascript" src="../rmarkdown/templates/flex_dashboard/resources/flexdashboard.js"></script>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+$endif$
+
+$for(css)$
+<link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+$endfor$
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+
+<span class="navbar-logo pull-left">
+  $if(logo)$<img src="$logo$" class="navbar-logo"/>$endif$
+</span>
+<span class="navbar-brand">
+  $if(title-prefix)$$title-prefix$ - $endif$$pagetitle$
+  <span class="navbar-author">
+  $if(author)$
+  $author$$if(date)$ &mdash; $date$$endif$
+  $else$
+  $if(date)$
+  $date$
+  $endif$
+  $endif$
+  </span>
+</span>
+
+<button id="navbar-button" type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div><!--/.nav-collapse-->
+</div><!--/.container-->
+</div><!--/.navbar-->
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+<div id="dashboard-container">
+
+$body$
+
+</div>
+
+<script>
+$$(document).ready(function() {
+  // add bootstrap table styles to pandoc tables
+  $$('tr.header').parent('thead').parent('table').addClass('table table-condensed table-sm');
+
+  // initialize mathjax
+$if(mathjax-url)$
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "$mathjax-url$";
+  document.getElementsByTagName("head")[0].appendChild(script);
+$endif$
+
+});
+</script>
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+</body>
+</html>
