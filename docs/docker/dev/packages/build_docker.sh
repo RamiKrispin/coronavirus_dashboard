@@ -13,7 +13,8 @@ else
 fi
 
 
-docker build . -t rkrispin/coronavirus_dashboard:$tag
+docker build . --progress=plain \
+                -t rkrispin/coronavirus_dashboard:$tag
 
 if [[ $? = 0 ]] ; then
 echo "Pushing docker..."
