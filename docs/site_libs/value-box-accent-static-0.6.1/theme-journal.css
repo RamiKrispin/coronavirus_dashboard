@@ -1,0 +1,17 @@
+body {
+  padding-top: 70px;
+}
+
+.section.sidebar {
+  top: 61px;
+  background-color: rgba(235, 104, 100, 0.15);
+}
+
+.storyboard-nav .sbframelist ul li.active {
+  background-color: rgba(235, 104, 100, 0.7);
+}
+
+
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: rgba(235, 104, 100, 0.7);
+}
