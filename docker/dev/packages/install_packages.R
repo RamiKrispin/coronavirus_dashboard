@@ -13,10 +13,11 @@ pkg_list <- c("readr",
               "plotly",
               "reactable",
               "leaflet",
-              "leafpop",
-              "coronavirus")
+              "leafpop")
 
 install.packages(pkgs = pkg_list, repos = "https://cran.rstudio.com/")
+
+devtools::install_github("RamiKrispin/coronavirus", upgrade = "never")
 
 fail <- FALSE
 
@@ -28,7 +29,7 @@ for(i in pkg_list){
     cat(i, "...Fail\n")
     fail <- TRUE
   }
-  
+
   if(fail){
     stop("Fail to install some package/s")
   }
